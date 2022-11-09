@@ -11,7 +11,7 @@ CREATE TABLE bizness (
     id INTEGER NOT NULL PRIMARY KEY,
     name varchar(24) NOT NULL,
     addresse varchar(24) NOT NULL,
-    telefonnummer varchar(24) NOT NULL,
+    telefonnummer varchar(24) NOT NULL UNIQUE,
     ceo varchar(24) NOT NULL,
 );
 
@@ -34,9 +34,9 @@ CREATE TABLE nutzer (
     vorname varchar(64) NOT NULL,
     nachname varchar(64) NOT NULL,
     anrede varchar(10) CHECK (anrede IN ('Herr', 'Frau')) ENABLE,
-    mail varchar(80) NOT NULL,
+    mail varchar(80) NOT NULL UNIQUE,
     einkaufswagen_id INTEGER NOT NULL,
-    iban varchar(22) NOT NULL,
+    iban varchar(22) NOT NULL UNIQUE,
     FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE CASCADE
 );
 
