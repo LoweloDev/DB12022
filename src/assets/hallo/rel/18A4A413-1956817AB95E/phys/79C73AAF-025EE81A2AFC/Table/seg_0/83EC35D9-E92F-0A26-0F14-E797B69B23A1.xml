@@ -1,0 +1,40 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="EINKAUFSWAGEN" directorySegmentName="seg_0" id="83EC35D9-E92F-0A26-0F14-E797B69B23A1">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>C7E95552-4C47-EA01-4EF6-7CFB1AD82D64</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ANZAHL" id="217158A4-CE63-B0A4-9EEF-3348B80AD373">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="6E1C21B0-7372-6DC2-AC06-2C23D65BBABC">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="EINKAUFSWAGEN_PK" id="7927E4A9-D9ED-4667-5213-9EA6304B3721">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>

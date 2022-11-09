@@ -1,0 +1,19 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<FKIndexAssociation class="oracle.dbtools.crest.model.design.relational.FKIndexAssociation" directorySegmentName="seg_0" id="F89DF496-E2A8-15A1-4D4D-048F2F061EFA" containerWithKeyObject="A277EDFC-774A-758B-7E45-6B910B690A27" localFKIndex="EFFA5F78-668D-6E1D-0FF0-712E13AEDD19" name="SYS_C007681">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007681</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<referredTableLongName>C##PROJEKT.EINKAUFSWAGEN</referredTableLongName>
+<deleteRule>CASCADE</deleteRule>
+<referredTableID>83EC35D9-E92F-0A26-0F14-E797B69B23A1</referredTableID>
+<keyObject>7927E4A9-D9ED-4667-5213-9EA6304B3721</keyObject>
+<referredKeyID>7927E4A9-D9ED-4667-5213-9EA6304B3721</referredKeyID>
+<mandatory>true</mandatory>
+<refColNames>ID</refColNames>
+<transferable>true</transferable>
+<rely>false</rely>
+<columnDependencyConstraintGenerateInDDL>true</columnDependencyConstraintGenerateInDDL>
+</FKIndexAssociation>
