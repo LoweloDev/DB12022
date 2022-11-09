@@ -20,6 +20,7 @@ CREATE TABLE kategorie (
     name varchar(24) NOT NULL,
     bild BLOB,
     subkategorie_id INTEGER DEFAULT NULL,
+    -- TODO check whether delete cascade on subcategory deletes main category
     FOREIGN KEY (subkategorie_id) REFERENCES kategorie(id) ON DELETE CASCADE
 
 );
@@ -35,9 +36,9 @@ CREATE TABLE nutzer (
     nachname varchar(64) NOT NULL,
     anrede varchar(10) CHECK (anrede IN ('Herr', 'Frau')) ENABLE,
     mail varchar(80) NOT NULL UNIQUE,
-    einkaufswagen_id INTEGER NOT NULL,
+    einkaufswagen_id INTEGER DEFAULT NULL,
     iban varchar(22) NOT NULL UNIQUE,
-    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE CASCADE
+    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id)
 );
 
 CREATE TABLE produkt (
@@ -47,9 +48,9 @@ CREATE TABLE produkt (
     skin varchar(24),
     geschlecht varchar(10) CHECK (geschlecht IN ('Männlich', 'Weiblich')) ENABLE,
     age INTEGER,
-    kategorie_id INTEGER NOT NULL,
+    kategorie_id INTEGER DEFAULT NULL,
     bizness_id INTEGER NOT NULL,
-    FOREIGN KEY (bizness_id) REFERENCES bizness(id),
+    FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE,
     FOREIGN KEY (kategorie_id) REFERENCES kategorie(id)
 );
 
@@ -57,16 +58,16 @@ CREATE TABLE einkaufswagen_produkt (
     einkaufswagen_id INTEGER NOT NULL,
     produkt_id INTEGER NOT NULL,
     PRIMARY KEY (einkaufswagen_id, produkt_id),
-    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id),
-    FOREIGN KEY (produkt_id) REFERENCES produkt(id)
+    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id) ON DELETE CASCADE,
+    FOREIGN KEY (produkt_id) REFERENCES produkt(id) ON DELETE CASCADE
 );
 
 CREATE TABLE kategorie_business (
     kategorie_id INTEGER NOT NULL,
     business_id INTEGER NOT NULL,
     PRIMARY KEY (kategorie_id, business_id),
-    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id),
-    FOREIGN KEY (business_id) REFERENCES bizness(id)
+    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE CASCADE,
+    FOREIGN KEY (business_id) REFERENCES bizness(id) ON DELETE CASCADE
 );
 
 CREATE TABLE bestellung (
