@@ -22,7 +22,6 @@ CREATE TABLE kategorie (
     subkategorie_id INTEGER DEFAULT NULL,
     -- TODO check whether delete cascade on subcategory deletes main category
     FOREIGN KEY (subkategorie_id) REFERENCES kategorie(id) ON DELETE CASCADE
-
 );
 
 CREATE TABLE einkaufswagen (
