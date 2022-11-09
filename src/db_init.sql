@@ -13,7 +13,7 @@ CREATE TABLE bizness (
     name varchar(24) NOT NULL,
     addresse varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
-    ceo varchar(24) NOT NULL,
+    ceo varchar(24) NOT NULL
 );
 
 CREATE TABLE kategorie (
@@ -38,7 +38,7 @@ CREATE TABLE nutzer (
     mail varchar(80) NOT NULL UNIQUE,
     einkaufswagen_id INTEGER DEFAULT NULL,
     iban varchar(22) NOT NULL UNIQUE,
-    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE SET DEFAULT
+    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE SET NULL
 );
 
 CREATE TABLE produkt (
@@ -51,7 +51,7 @@ CREATE TABLE produkt (
     kategorie_id INTEGER DEFAULT NULL,
     bizness_id INTEGER NOT NULL,
     FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE,
-    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET DEFAULT
+    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET NULL
 );
 
 CREATE TABLE einkaufswagen_produkt (
