@@ -11,14 +11,16 @@ DROP TABLE produkt CASCADE CONSTRAINTS  PURGE;
 DROP TABLE einkaufswagen_produkt CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie_business CASCADE CONSTRAINTS  PURGE;
 DROP TABLE bestellung CASCADE CONSTRAINTS  PURGE;
-
+DROP TABLE business_bestellung CASCADE CONSTRAINTS  PURGE;
+DROP TABLE bestellung_produkt CASCADE CONSTRAINTS  PURGE;
 
 CREATE TABLE bizness (
     id INTEGER NOT NULL PRIMARY KEY,
     name varchar(24) NOT NULL,
     addresse varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
-    ceo varchar(24) NOT NULL
+    ceo varchar(24) NOT NULL,
+    iban varchar(22) NOT NULL UNIQUE
 );
 
 CREATE TABLE kategorie (
@@ -32,7 +34,10 @@ CREATE TABLE kategorie (
 
 CREATE TABLE einkaufswagen (
     id INTEGER NOT NULL PRIMARY KEY,
-    anzahl INTEGER
+    anzahl INTEGER,
+    nutzer_id INTEGER NOT NULL,
+
+    FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE nutzer (
@@ -60,9 +65,10 @@ CREATE TABLE produkt (
 );
 
 CREATE TABLE einkaufswagen_produkt (
+    id INTEGER NOT NULL PRIMARY KEY,
     einkaufswagen_id INTEGER NOT NULL,
     produkt_id INTEGER NOT NULL,
-    PRIMARY KEY (einkaufswagen_id, produkt_id),
+
     FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id) ON DELETE CASCADE,
     FOREIGN KEY (produkt_id) REFERENCES produkt(id) ON DELETE CASCADE
 );
@@ -85,3 +91,21 @@ CREATE TABLE bestellung (
     FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE,
     FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE
 );
+
+CREATE TABLE business_bestellung (
+    business_id INTEGER NOT NULL,
+    bestellung_id INTEGER NOT NULL,
+
+    PRIMARY KEY (business_id, bestellung_id),
+    FOREIGN KEY (business_id) REFERENCES bizness(id) ON DELETE CASCADE,
+    FOREIGN KEY (bestellung_id) REFERENCES bestellung(id) ON DELETE CASCADE
+)
+
+CREATE TABLE bestellung_produkt (
+    id INTEGER NOT NULL PRIMARY KEY,
+    bestellung_id INTEGER NOT NULL,
+    produkt_id INTEGER NOT NULL,
+
+    FOREIGN KEY (bestellung_id) REFERENCES bestellung(id),
+    FOREIGN KEY (produkt_id) REFERENCES produkt(id)
+)
