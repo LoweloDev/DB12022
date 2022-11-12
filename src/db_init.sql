@@ -9,6 +9,7 @@ DROP TABLE einkaufswagen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE nutzer CASCADE CONSTRAINTS  PURGE;
 DROP TABLE produkt CASCADE CONSTRAINTS  PURGE;
 DROP TABLE einkaufswagen_produkt CASCADE CONSTRAINTS  PURGE;
+DROP TABLE nutzer_einkaufswagen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie_business CASCADE CONSTRAINTS  PURGE;
 DROP TABLE bestellung CASCADE CONSTRAINTS  PURGE;
 DROP TABLE business_bestellung CASCADE CONSTRAINTS  PURGE;
@@ -35,7 +36,7 @@ CREATE TABLE kategorie (
 CREATE TABLE einkaufswagen (
     id INTEGER NOT NULL PRIMARY KEY,
     anzahl INTEGER,
-    nutzer_id INTEGER NOT NULL,
+    nutzer_id INTEGER NOT NULL
 );
 
 CREATE TABLE nutzer (
@@ -45,7 +46,7 @@ CREATE TABLE nutzer (
     anrede varchar(10) CHECK (anrede IN ('Herr', 'Frau')) ENABLE,
     mail varchar(80) NOT NULL UNIQUE,
     einkaufswagen_id INTEGER DEFAULT NULL,
-    iban varchar(22) NOT NULL UNIQUE,
+    iban varchar(22) NOT NULL UNIQUE
 );
 
 CREATE TABLE nutzer_einkaufswagen (
@@ -54,7 +55,7 @@ CREATE TABLE nutzer_einkaufswagen (
 
     FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE,
     FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE produkt (
     id INTEGER NOT NULL PRIMARY KEY,
@@ -104,7 +105,7 @@ CREATE TABLE business_bestellung (
     PRIMARY KEY (business_id, bestellung_id),
     FOREIGN KEY (business_id) REFERENCES bizness(id) ON DELETE CASCADE,
     FOREIGN KEY (bestellung_id) REFERENCES bestellung(id) ON DELETE CASCADE
-)
+);
 
 CREATE TABLE bestellung_produkt (
     id INTEGER NOT NULL PRIMARY KEY,
@@ -113,4 +114,4 @@ CREATE TABLE bestellung_produkt (
 
     FOREIGN KEY (bestellung_id) REFERENCES bestellung(id),
     FOREIGN KEY (produkt_id) REFERENCES produkt(id)
-)
+);
