@@ -1,18 +1,24 @@
-DROP TABLE bizness CASCADE CONSTRAINTS;
-DROP TABLE kategorie CASCADE CONSTRAINTS;
-DROP TABLE einkaufswagen CASCADE CONSTRAINTS;
-DROP TABLE nutzer CASCADE CONSTRAINTS;
-DROP TABLE produkt CASCADE CONSTRAINTS;
-DROP TABLE einkaufswagen_produkt CASCADE CONSTRAINTS;
-DROP TABLE kategorie_business CASCADE CONSTRAINTS;
-DROP TABLE bestellung CASCADE CONSTRAINTS;
+/* Online-Marktplatz
+    Mehmet Özer         7206358 
+    Tobias Barthold     7209370
+    Yusuf Bas           7209349 */
+
+DROP TABLE bizness CASCADE CONSTRAINTS  PURGE;
+DROP TABLE kategorie CASCADE CONSTRAINTS  PURGE;
+DROP TABLE einkaufswagen CASCADE CONSTRAINTS  PURGE;
+DROP TABLE nutzer CASCADE CONSTRAINTS  PURGE;
+DROP TABLE produkt CASCADE CONSTRAINTS  PURGE;
+DROP TABLE einkaufswagen_produkt CASCADE CONSTRAINTS  PURGE;
+DROP TABLE kategorie_business CASCADE CONSTRAINTS  PURGE;
+DROP TABLE bestellung CASCADE CONSTRAINTS  PURGE;
+
 
 CREATE TABLE bizness (
     id INTEGER NOT NULL PRIMARY KEY,
     name varchar(24) NOT NULL,
     addresse varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
-    ceo varchar(24) NOT NULL,
+    ceo varchar(24) NOT NULL
 );
 
 CREATE TABLE kategorie (
@@ -37,7 +43,7 @@ CREATE TABLE nutzer (
     mail varchar(80) NOT NULL UNIQUE,
     einkaufswagen_id INTEGER DEFAULT NULL,
     iban varchar(22) NOT NULL UNIQUE,
-    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE SET DEFAULT
+    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE SET NULL
 );
 
 CREATE TABLE produkt (
@@ -50,7 +56,7 @@ CREATE TABLE produkt (
     kategorie_id INTEGER DEFAULT NULL,
     bizness_id INTEGER NOT NULL,
     FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE,
-    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET DEFAULT
+    FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET NULL
 );
 
 CREATE TABLE einkaufswagen_produkt (

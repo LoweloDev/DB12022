@@ -1,0 +1,97 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="NUTZER" directorySegmentName="seg_0" id="A1A926B1-6AB7-E854-B6A2-F6A12FF4CDBD">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>C7E95552-4C47-EA01-4EF6-7CFB1AD82D64</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ID" id="0BEB621E-AA2D-E675-E884-7BFF9E494415">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NACHNAME" id="26F056E3-E06F-2F51-1D3B-8F363444D647">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EINKAUFSWAGEN_ID" id="364C7029-2DCE-8EB6-5646-0E2A547856FC">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<defaultValue>NULL</defaultValue>
+</ColumnProxy>
+<ColumnProxy name="ANREDE" id="54B3576A-F331-3FA5-81E4-9A2170F7C219">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="IBAN" id="CC9393F3-694D-B5B1-1AC2-6F9899624358">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="VORNAME" id="E6C2FE76-A498-4C7B-0897-3CA42C9C3A81">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="MAIL" id="FDE26771-B7B7-26F7-FE1C-ECD2F0E712D4">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007669" id="7D7745AF-A65F-FB5F-401F-57D0263586CE">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="NUTZER_PK" id="DDE78700-7ABC-8E6B-D9F4-8B06B5621327">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="NUTZER_IBAN_UN" id="A10CFE22-E3F3-0873-E7AF-C5A704B8F20C">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</UniqueKey>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="NUTZER_MAIL_UN" id="C228AC69-8AE9-EBA3-BE18-7B984190195E">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev12c>

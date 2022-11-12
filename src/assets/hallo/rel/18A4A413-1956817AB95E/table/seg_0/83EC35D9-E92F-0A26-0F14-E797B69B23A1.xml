@@ -1,0 +1,61 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="83EC35D9-E92F-0A26-0F14-E797B69B23A1" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="EINKAUFSWAGEN">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>EINKAUFSWAGEN</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="6E1C21B0-7372-6DC2-AC06-2C23D65BBABC">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>EINKAUFSWAGEN</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ANZAHL" id="217158A4-CE63-B0A4-9EEF-3348B80AD373">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>EINKAUFSWAGEN</sourceObjSchema>
+<sourceObjName>ANZAHL</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="7927E4A9-D9ED-4667-5213-9EA6304B3721" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="EINKAUFSWAGEN_PK">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007659</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6E1C21B0-7372-6DC2-AC06-2C23D65BBABC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

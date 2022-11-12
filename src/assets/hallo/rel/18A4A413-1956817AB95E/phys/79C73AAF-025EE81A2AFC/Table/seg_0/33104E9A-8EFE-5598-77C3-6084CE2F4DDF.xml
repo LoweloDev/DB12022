@@ -1,0 +1,68 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="BIZNESS" directorySegmentName="seg_0" id="33104E9A-8EFE-5598-77C3-6084CE2F4DDF">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>C7E95552-4C47-EA01-4EF6-7CFB1AD82D64</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="ADDRESSE" id="653B786E-4AC3-D235-2FA8-85400EAED732">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="NAME" id="7F1409AD-D475-7BD0-C1F9-F5558157A74B">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="ID" id="94BA3FC8-B2F0-6D77-A562-58602BC805FB">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="TELEFONNUMMER" id="996C882B-6A77-66D2-5530-DE107A7ED970">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="CEO" id="FD53BA4C-5110-0877-26DD-55B8349E09CA">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="BIZNESS_PK" id="194320AC-B0DF-8402-37D6-B0C1E76F003C">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+<uniqueKeys>
+<UniqueKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.UniqueOraclev10g" name="BIZNESS_TELEFONNUMMER_UN" id="04510835-7E8A-4EC0-9EDD-F1B27A7A2D1F">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</UniqueKey>
+</uniqueKeys>
+</TableProxyOraclev12c>

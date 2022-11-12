@@ -1,0 +1,177 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A1A926B1-6AB7-E854-B6A2-F6A12FF4CDBD" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="NUTZER">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>NUTZER</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="0BEB621E-AA2D-E675-E884-7BFF9E494415">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="VORNAME" id="E6C2FE76-A498-4C7B-0897-3CA42C9C3A81">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>VORNAME</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64 BYTE</dataTypeSize>
+<ownDataTypeParameters>64 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NACHNAME" id="26F056E3-E06F-2F51-1D3B-8F363444D647">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>NACHNAME</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>64 BYTE</dataTypeSize>
+<ownDataTypeParameters>64 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="ANREDE" id="54B3576A-F331-3FA5-81E4-9A2170F7C219">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>ANREDE</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<constraintName>SYS_C007665</constraintName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>10 BYTE</dataTypeSize>
+<listOfValues>
+<valueDef value="&apos;Frau&apos;" description=""/>
+<valueDef value="&apos;Herr&apos;" description=""/>
+</listOfValues>
+<ownDataTypeParameters>10 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="MAIL" id="FDE26771-B7B7-26F7-FE1C-ECD2F0E712D4">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>MAIL</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>80 BYTE</dataTypeSize>
+<ownDataTypeParameters>80 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="EINKAUFSWAGEN_ID" id="364C7029-2DCE-8EB6-5646-0E2A547856FC">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>EINKAUFSWAGEN_ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<defaultValue>NULL</defaultValue>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="7F3589CD-D26A-BF4B-4FE5-A4FA7157022F" referredColumn="6E1C21B0-7372-6DC2-AC06-2C23D65BBABC"/>
+</associations>
+</Column>
+<Column name="IBAN" id="CC9393F3-694D-B5B1-1AC2-6F9899624358">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>NUTZER</sourceObjSchema>
+<sourceObjName>IBAN</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>22 BYTE</dataTypeSize>
+<ownDataTypeParameters>22 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="DDE78700-7ABC-8E6B-D9F4-8B06B5621327" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="NUTZER_PK">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007666</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="0BEB621E-AA2D-E675-E884-7BFF9E494415"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="C228AC69-8AE9-EBA3-BE18-7B984190195E" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="NUTZER_MAIL_UN">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007667</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="FDE26771-B7B7-26F7-FE1C-ECD2F0E712D4"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="A10CFE22-E3F3-0873-E7AF-C5A704B8F20C" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="NUTZER_IBAN_UN">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007668</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Unique Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CC9393F3-694D-B5B1-1AC2-6F9899624358"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="7D7745AF-A65F-FB5F-401F-57D0263586CE" name="SYS_C007669">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="364C7029-2DCE-8EB6-5646-0E2A547856FC"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

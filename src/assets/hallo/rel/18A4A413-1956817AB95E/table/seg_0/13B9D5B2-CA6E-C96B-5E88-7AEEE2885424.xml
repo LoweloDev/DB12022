@@ -1,0 +1,104 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="13B9D5B2-CA6E-C96B-5E88-7AEEE2885424" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="KATEGORIE">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>KATEGORIE</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="ID" id="CDD17EEA-A303-836D-4D32-8A004E2BD407">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>KATEGORIE</sourceObjSchema>
+<sourceObjName>ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="NAME" id="BB2B4ADD-994C-F573-6B3A-1EEB761C7308">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>KATEGORIE</sourceObjSchema>
+<sourceObjName>NAME</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT024</logicalDatatype>
+<dataTypeSize>24 BYTE</dataTypeSize>
+<ownDataTypeParameters>24 BYTE,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="BILD" id="164ACA97-5099-F9C5-942C-06C392DA63C5">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>KATEGORIE</sourceObjSchema>
+<sourceObjName>BILD</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT029</logicalDatatype>
+<dataTypeSize>4000</dataTypeSize>
+<ownDataTypeParameters>4000,,</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+</Column>
+<Column name="SUBKATEGORIE_ID" id="6D8F4BDF-F14C-1FA4-4D0D-32AF7C703332">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>KATEGORIE</sourceObjSchema>
+<sourceObjName>SUBKATEGORIE_ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<nullsAllowed>true</nullsAllowed>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<defaultValue>NULL</defaultValue>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="09D74BB1-3FC5-C366-2686-1EF4661135BD" referredColumn="CDD17EEA-A303-836D-4D32-8A004E2BD407"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="1A01271E-7319-14D7-4441-3E43BF0B3519" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="KATEGORIE_PK">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007656</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="CDD17EEA-A303-836D-4D32-8A004E2BD407"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="FBCDBB97-26A6-48A6-73FB-9B0A83E3D9C8" name="SYS_C007657">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="6D8F4BDF-F14C-1FA4-4D0D-32AF7C703332"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

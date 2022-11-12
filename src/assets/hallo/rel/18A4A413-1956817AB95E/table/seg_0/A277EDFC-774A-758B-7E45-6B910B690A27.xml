@@ -1,0 +1,87 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<Table class="oracle.dbtools.crest.model.design.relational.Table" directorySegmentName="seg_0" id="A277EDFC-774A-758B-7E45-6B910B690A27" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="EINKAUFSWAGEN_PRODUKT">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>EINKAUFSWAGEN_PRODUKT</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<allowColumnReorder>false</allowColumnReorder>
+<existDependencyGenerateInDDl>true</existDependencyGenerateInDDl>
+<parsed>true</parsed>
+<columns itemClass="oracle.dbtools.crest.model.design.relational.Column">
+<Column name="EINKAUFSWAGEN_ID" id="E4375982-AEA4-5CDE-27AA-933F9A2FF3E0">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>EINKAUFSWAGEN_PRODUKT</sourceObjSchema>
+<sourceObjName>EINKAUFSWAGEN_ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="F89DF496-E2A8-15A1-4D4D-048F2F061EFA" referredColumn="6E1C21B0-7372-6DC2-AC06-2C23D65BBABC"/>
+</associations>
+</Column>
+<Column name="PRODUKT_ID" id="7092200B-3A9F-AEA5-B724-B75E4B522381">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>EINKAUFSWAGEN_PRODUKT</sourceObjSchema>
+<sourceObjName>PRODUKT_ID</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<useDomainConstraints>false</useDomainConstraints>
+<use>1</use>
+<logicalDatatype>LOGDT019</logicalDatatype>
+<dataTypePrecision>*</dataTypePrecision>
+<dataTypeScale>0</dataTypeScale>
+<ownDataTypeParameters>,*,0</ownDataTypeParameters>
+<autoIncrementCycle>false</autoIncrementCycle>
+<associations>
+<colAssociation fkAssociation="D95A0103-A70F-4AF1-388E-0F34ABB008E5" referredColumn="E58BA432-0C46-30A0-462C-3A547832653D"/>
+</associations>
+</Column>
+</columns>
+<indexes itemClass="oracle.dbtools.crest.model.design.relational.Index">
+<ind_PK_UK id="5B2ED0F4-3A6A-7319-5A06-E469C149CE1A" schemaObject="818625DD-6DA3-5503-CF58-C11D8EA7A824" name="EINKAUFSWAGEN_PRODUKT_PK">
+<sourceConnName>db1p</sourceConnName>
+<sourceObjSchema>C##PROJEKT</sourceObjSchema>
+<sourceObjName>SYS_C007680</sourceObjName>
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<pk>true</pk>
+<indexState>Primary Constraint</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E4375982-AEA4-5CDE-27AA-933F9A2FF3E0"/>
+<colUsage columnID="7092200B-3A9F-AEA5-B724-B75E4B522381"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="EFFA5F78-668D-6E1D-0FF0-712E13AEDD19" name="SYS_C007681">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="E4375982-AEA4-5CDE-27AA-933F9A2FF3E0"/>
+</indexColumnUsage>
+</ind_PK_UK>
+<ind_PK_UK id="4F5E6858-35BB-DAF4-CD1F-C26FE369FD1D" name="SYS_C007682">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<indexState>Foreign Key</indexState>
+<isSurrogateKey>false</isSurrogateKey>
+<indexColumnUsage>
+<colUsage columnID="7092200B-3A9F-AEA5-B724-B75E4B522381"/>
+</indexColumnUsage>
+</ind_PK_UK>
+</indexes>
+</Table>

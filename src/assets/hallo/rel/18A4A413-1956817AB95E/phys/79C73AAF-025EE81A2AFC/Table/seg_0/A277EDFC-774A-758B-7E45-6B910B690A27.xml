@@ -1,0 +1,52 @@
+<?xml version = '1.0' encoding = 'UTF-8'?>
+<TableProxyOraclev12c class="oracle.dbtools.crest.model.design.storage.oracle.v12c.TableProxyOraclev12c" name="EINKAUFSWAGEN_PRODUKT" directorySegmentName="seg_0" id="A277EDFC-774A-758B-7E45-6B910B690A27">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<logging>YES</logging>
+<partitionedRowMovement>DISABLE</partitionedRowMovement>
+<segment>C7E95552-4C47-EA01-4EF6-7CFB1AD82D64</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<temporaryChanged>false</temporaryChanged>
+<accessDriverType>oracle_loader</accessDriverType>
+<rejectLimit></rejectLimit>
+<inMemory>NO</inMemory>
+<columnProxies itemClass="oracle.dbtools.crest.model.design.storage.oracle.v12c.ColumnProxyOraclev12c">
+<ColumnProxy name="PRODUKT_ID" id="7092200B-3A9F-AEA5-B724-B75E4B522381">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+<ColumnProxy name="EINKAUFSWAGEN_ID" id="E4375982-AEA4-5CDE-27AA-933F9A2FF3E0">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:56 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ColumnProxy>
+</columnProxies>
+<foreignKeys>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007682" id="4F5E6858-35BB-DAF4-CD1F-C26FE369FD1D">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ForeignKey>
+<ForeignKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.FKProxyOraclev10g" name="SYS_C007681" id="EFFA5F78-668D-6E1D-0FF0-712E13AEDD19">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+</ForeignKey>
+</foreignKeys>
+<primaryKeys>
+<PrimaryKey class="oracle.dbtools.crest.model.design.storage.oracle.v10g.PKProxyOraclev10g" name="EINKAUFSWAGEN_PRODUKT_PK" id="5B2ED0F4-3A6A-7319-5A06-E469C149CE1A">
+<createdBy>yusuf</createdBy>
+<createdTime>2022-11-09 20:15:57 UTC</createdTime>
+<ownerDesignName>hallo</ownerDesignName>
+<schemaObject>818625DD-6DA3-5503-CF58-C11D8EA7A824</schemaObject>
+<segment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</segment>
+<tableSpace>46BD9889-7591-94C2-C893-DA1305C1415B</tableSpace>
+<indexSegment>84C6E663-ED3F-CFB3-AC55-9605DEFACA21</indexSegment>
+<indexSort>SORTED</indexSort>
+<usingIndex>BY INDEX NAME</usingIndex>
+</PrimaryKey>
+</primaryKeys>
+</TableProxyOraclev12c>
