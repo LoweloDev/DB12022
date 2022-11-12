@@ -1,3 +1,8 @@
+/* Online-Marktplatz
+    Mehmet Özer         7206358 
+    Tobias Barthold     7209370
+    Yusuf Bas           7209349 */
+
 DROP TABLE bizness CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie CASCADE CONSTRAINTS  PURGE;
 DROP TABLE einkaufswagen CASCADE CONSTRAINTS  PURGE;
