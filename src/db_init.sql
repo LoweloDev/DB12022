@@ -36,8 +36,6 @@ CREATE TABLE einkaufswagen (
     id INTEGER NOT NULL PRIMARY KEY,
     anzahl INTEGER,
     nutzer_id INTEGER NOT NULL,
-
-    FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE
 );
 
 CREATE TABLE nutzer (
@@ -48,8 +46,15 @@ CREATE TABLE nutzer (
     mail varchar(80) NOT NULL UNIQUE,
     einkaufswagen_id INTEGER DEFAULT NULL,
     iban varchar(22) NOT NULL UNIQUE,
-    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen (id) ON DELETE SET NULL
 );
+
+CREATE TABLE nutzer_einkaufswagen (
+    nutzer_id INTEGER NOT NULL PRIMARY KEY,
+    einkaufswagen_id INTEGER NOT NULL UNIQUE,
+
+    FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE,
+    FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id) ON DELETE CASCADE
+)
 
 CREATE TABLE produkt (
     id INTEGER NOT NULL PRIMARY KEY,
