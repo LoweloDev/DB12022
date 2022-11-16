@@ -1,3 +1,5 @@
+![Modell](assets/Relationales_Modell.png)
+
 Wir haben zum einen ein Unternehmen, ein Unternehmen kann natürlich mehrere Produkte also in dem Fall Tiere haben. In unserem Fall haben wir so entschieden,
 dass ein Produkt in unserem Fall einzigartig ist weil es ein Lebewesen ist und man ein Tier in der Regel ja nicht einfach nach Rasse und Fell auswählt, sodnern auch nach
 Namen und/oder Persönlichkeit. Entsprechend eine 1:N Beziehung von Unternehmen zu Produkt/Tier. Somit ist bei Produkt ein Fremdschlüssel der auf den Primary-Key von einem Business referenziert.

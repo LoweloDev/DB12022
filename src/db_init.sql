@@ -3,7 +3,7 @@
     Tobias Barthold     7209370
     Yusuf Bas           7209349 */
 
-DROP TABLE bizness CASCADE CONSTRAINTS  PURGE;
+DROP TABLE unternehmen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie CASCADE CONSTRAINTS  PURGE;
 DROP TABLE einkaufswagen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE nutzer CASCADE CONSTRAINTS  PURGE;
@@ -12,10 +12,9 @@ DROP TABLE einkaufswagen_produkt CASCADE CONSTRAINTS  PURGE;
 DROP TABLE nutzer_einkaufswagen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie_business CASCADE CONSTRAINTS  PURGE;
 DROP TABLE bestellung CASCADE CONSTRAINTS  PURGE;
-DROP TABLE business_bestellung CASCADE CONSTRAINTS  PURGE;
 DROP TABLE bestellung_produkt CASCADE CONSTRAINTS  PURGE;
 
-CREATE TABLE bizness (
+CREATE TABLE unternehmen (
     id INTEGER NOT NULL PRIMARY KEY,
     name varchar(24) NOT NULL,
     addresse varchar(24) NOT NULL,
@@ -35,8 +34,7 @@ CREATE TABLE kategorie (
 
 CREATE TABLE einkaufswagen (
     id INTEGER NOT NULL PRIMARY KEY,
-    anzahl INTEGER,
-    nutzer_id INTEGER NOT NULL
+    anzahl INTEGER
 );
 
 CREATE TABLE nutzer (
@@ -45,7 +43,6 @@ CREATE TABLE nutzer (
     nachname varchar(64) NOT NULL,
     anrede varchar(10) CHECK (anrede IN ('Herr', 'Frau')) ENABLE,
     mail varchar(80) NOT NULL UNIQUE,
-    einkaufswagen_id INTEGER DEFAULT NULL,
     iban varchar(22) NOT NULL UNIQUE
 );
 
@@ -65,10 +62,10 @@ CREATE TABLE produkt (
     geschlecht varchar(10) CHECK (geschlecht IN ('Männlich', 'Weiblich')) ENABLE,
     age INTEGER,
     kategorie_id INTEGER DEFAULT NULL,
-    bizness_id INTEGER NOT NULL,
+    unternehmen_id INTEGER NOT NULL,
 
 
-    FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE,
+    FOREIGN KEY (unternehmen_id) REFERENCES unternehmen(id) ON DELETE CASCADE,
     FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET NULL
 );
 
@@ -86,25 +83,35 @@ CREATE TABLE kategorie_business (
     business_id INTEGER NOT NULL,
     PRIMARY KEY (kategorie_id, business_id),
     FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE CASCADE,
-    FOREIGN KEY (business_id) REFERENCES bizness(id) ON DELETE CASCADE
+    FOREIGN KEY (business_id) REFERENCES unternehmen(id) ON DELETE CASCADE
 );
 
 CREATE TABLE bestellung (
     id INTEGER NOT NULL PRIMARY KEY,
-    bizness_id INTEGER NOT NULL,
+    unternehmen_id INTEGER NOT NULL,
     nutzer_id INTEGER NOT NULL,
     bestellstatus varchar(10) NOT NULL,
     bestelldatum DATE NOT NULL,
     lieferaddresse varchar(24) NOT NULL,
     FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE,
-    FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE
+    FOREIGN KEY (unternehmen_id) REFERENCES unternehmen(id) ON DELETE CASCADE
 );
 
 CREATE TABLE bestellung_produkt (
-    id INTEGER NOT NULL PRIMARY KEY,
     bestellung_id INTEGER NOT NULL,
     produkt_id INTEGER NOT NULL,
 
-    FOREIGN KEY (bestellung_id) REFERENCES bestellung(id),
-    FOREIGN KEY (produkt_id) REFERENCES produkt(id)
+    PRIMARY KEY (bestellung_id, produkt_id),
+    FOREIGN KEY (bestellung_id) REFERENCES bestellung(id) ON DELETE CASCADE,
+    FOREIGN KEY (produkt_id) REFERENCES produkt(id) ON DELETE CASCADE
 );
+INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban) values(1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE5044050199350280');
+INSERT INTO kategorie(id,name, bild, subkategorie_id) values(1,'Mathias Stark', EMPTY_BLOB(), NULL);
+INSERT INTO einkaufswagen(id, anzahl) values(1, 0);
+INSERT INTO nutzer(id,vorname,nachname, anrede, mail, iban) values(1,'Lukas', 'Hermann', 'Herr', 'lukashermann@hotmail.com','DE5044050199350280');
+INSERT INTO produkt(id, name, preis, skin, geschlecht,age, kategorie_id, unternehmen_id) values(1, 'Löwe', 6.50, 'Zebrastreifen', 'Männlich', 6,1,1);
+INSERT INTO einkaufswagen_produkt(einkaufswagen_id, produkt_id) values(1,1);
+INSERT INTO nutzer_einkaufswagen(nutzer_id, einkaufswagen_id) values(1,1);
+INSERT INTO kategorie_business(kategorie_id, business_id) values(1,1);
+INSERT INTO bestellung(id, unternehmen_id, nutzer_id, bestellstatus, bestelldatum, lieferaddresse) values(1,1,1, 'Auf Lager', '16-11-22', 'Nordstraße');
+INSERT INTO bestellung_produkt(bestellung_id, produkt_id) values(1,1);
