@@ -66,15 +66,17 @@ CREATE TABLE produkt (
     age INTEGER,
     kategorie_id INTEGER DEFAULT NULL,
     bizness_id INTEGER NOT NULL,
+
+
     FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE,
     FOREIGN KEY (kategorie_id) REFERENCES kategorie(id) ON DELETE SET NULL
 );
 
 CREATE TABLE einkaufswagen_produkt (
-    id INTEGER NOT NULL PRIMARY KEY,
     einkaufswagen_id INTEGER NOT NULL,
     produkt_id INTEGER NOT NULL,
 
+    PRIMARY KEY (einkaufswagen_id, produkt_id),
     FOREIGN KEY (einkaufswagen_id) REFERENCES einkaufswagen(id) ON DELETE CASCADE,
     FOREIGN KEY (produkt_id) REFERENCES produkt(id) ON DELETE CASCADE
 );
@@ -97,15 +99,6 @@ CREATE TABLE bestellung (
     FOREIGN KEY (nutzer_id) REFERENCES nutzer(id) ON DELETE CASCADE,
     FOREIGN KEY (bizness_id) REFERENCES bizness(id) ON DELETE CASCADE
 );
--- TODO relationen & Aussagenlogik checken, Produkt kann auch nur in einem Einkaufswagen sein wegen Einzigartigkeit --
--- CREATE TABLE business_bestellung (
---     business_id INTEGER NOT NULL,
---     bestellung_id INTEGER NOT NULL,
---
---     PRIMARY KEY (business_id, bestellung_id),
---     FOREIGN KEY (business_id) REFERENCES bizness(id) ON DELETE CASCADE,
---     FOREIGN KEY (bestellung_id) REFERENCES bestellung(id) ON DELETE CASCADE
--- );
 
 CREATE TABLE bestellung_produkt (
     id INTEGER NOT NULL PRIMARY KEY,
