@@ -13,6 +13,7 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
     implementation "com.oracle.ojdbc:ojdbc8:19.3.0.0"
+    implementation "com.ibatis:ibatis2-common:2.1.7.597"
 }
 
 test {

@@ -1,5 +1,8 @@
 package org.db1.data;
 
+import com.ibatis.common.jdbc.ScriptRunner;
+
+import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -26,10 +29,29 @@ public class Database {
         try {
             connection = DriverManager.getConnection(url, user, pass);
             Class.forName("oracle.jdbc.driver.OracleDriver");
+            Database.dropAndCreate(connection);
         } catch (SQLException | ClassNotFoundException e) {
             e.printStackTrace();
         }
 
+
+
         return connection;
+    }
+
+    private static void dropAndCreate(Connection connection) {
+        try {
+            ScriptRunner scriptRunner = new ScriptRunner(connection, false, true);
+            String filePath = new File("").getAbsolutePath();
+            filePath = filePath.concat("\\src\\main\\java\\org\\db1\\data\\db_init.sql");
+
+            System.out.println("PFAD");
+            System.out.println(filePath);
+
+            Reader reader = new BufferedReader(new FileReader(filePath));
+            scriptRunner.runScript(reader);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
