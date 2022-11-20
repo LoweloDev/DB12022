@@ -28,8 +28,8 @@ public class StatementFactory {
         }
         sb.append(")");
         System.out.println(sb);
-        PreparedStatement stmt = dbInit.getCon().prepareStatement(sb.toString());
-        return stmt;
+
+        return dbInit.getCon().prepareStatement(sb.toString());
     }
 
     public PreparedStatement buildUpdateStatement(String table) throws SQLException{

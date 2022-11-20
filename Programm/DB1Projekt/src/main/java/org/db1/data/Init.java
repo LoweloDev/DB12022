@@ -1,6 +1,5 @@
 package org.db1.data;
 import org.db1.ui.UserInput;
-
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
@@ -15,7 +14,12 @@ public class Init {
     private Connection con;
     private static Init instance;
 
-
+    /**
+     * @param url Url der Datenbank mit der sich verbunden werden soll
+     * @param user User mit dem sich in der Datenbank eingeloggt werden soll
+     * @param pass Passwort des Benutzers der Datenbank
+     * <code>DatabaseInit</code> initialisierung der Verbindung und arbeitsnotwendigen Daten
+     */
     public Init(String url, String user, String pass) {
         this.tableNames = new ArrayList<>();
         this.tableData = new HashMap<>();
@@ -39,24 +43,19 @@ public class Init {
             methodByTypeUI.put("NUMBER", UserInput.class.getMethod("readLong"));
             methodByTypeUI.put("VARCHAR2", UserInput.class.getMethod("readString"));
             methodByTypeUI.put("DATE", UserInput.class.getMethod("readDate"));
-            methodByTypeUI.put("TIMESTAMP", UserInput.class.getMethod("readTimestamp"));
             methodByTypeUI.put("CHAR", UserInput.class.getMethod("readChar"));
 
             methodByTypeSQLInsert.put("NUMBER", PreparedStatement.class.getMethod("setLong", int.class, long.class));
             methodByTypeSQLInsert.put("VARCHAR2", PreparedStatement.class.getMethod("setString", int.class, String.class));
             methodByTypeSQLInsert.put("DATE", PreparedStatement.class.getMethod("setDate", int.class, Date.class));
-            methodByTypeSQLInsert.put("TIMESTAMP", PreparedStatement.class.getMethod("setTimestamp", int.class, Timestamp.class));
             methodByTypeSQLInsert.put("CHAR", PreparedStatement.class.getMethod("setString", int.class, String.class));
 
             methodByTypeSQLGet.put("NUMBER", ResultSet.class.getMethod("getLong", int.class));
             methodByTypeSQLGet.put("VARCHAR2", ResultSet.class.getMethod("getString", int.class));
             methodByTypeSQLGet.put("DATE", ResultSet.class.getMethod("getDate", int.class));
-            methodByTypeSQLGet.put("TIMESTAMP", ResultSet.class.getMethod("getTimestamp", int.class));
             methodByTypeSQLGet.put("CHAR", ResultSet.class.getMethod("getString", int.class));
 
-        } catch (Exception e) {
-
-        }
+        } catch (Exception ignored) {}
     }
 
     private void initTableNames(){
@@ -76,8 +75,7 @@ public class Init {
             System.out.println("Herzlichen Glückwunsch du hast ein Easter Egg gefunden!");
         }
 
-        for (int i = 0; i < tableNames.size(); i++) {
-            String tableName = tableNames.get(i);
+        for (String tableName : tableNames) {
             tableData.put(tableName, initColNamesNTypes(tableName));
         }
 
@@ -119,10 +117,7 @@ public class Init {
                         metaData.getColumnType(i), metaData.isNullable(i) == ResultSetMetaData.columnNullable, isPrimaryKey);
                 map.put(i - 1, meta);
             }
-        } catch (Exception e) {
-            //Passiert hoffentlich nie
-            e.printStackTrace();
-        }
+        } catch (Exception ignored) {}
 
         return map;
     }

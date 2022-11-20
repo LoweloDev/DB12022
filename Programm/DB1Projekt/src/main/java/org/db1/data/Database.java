@@ -39,6 +39,7 @@ public class Database {
         return connection;
     }
 
+    // TODO create Tables before running script
     private static void dropAndCreate(Connection connection) {
         try {
             ScriptRunner scriptRunner = new ScriptRunner(connection, false, true);
@@ -53,5 +54,10 @@ public class Database {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        /**
+         * Diese Methode wird initialisiert, um die im SQL angewendeten Drop und create methoden zu nutzen.<br>
+         * Mit drop werden die Tabellen gelöscht und mit Create werden die Tabellen wieder erstellt.<br>
+         *
+         */
     }
 }

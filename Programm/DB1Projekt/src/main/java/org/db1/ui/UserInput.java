@@ -1,9 +1,10 @@
 package org.db1.ui;
 
+import org.db1.shared.Helpers;
+
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 /**
@@ -15,6 +16,7 @@ public class UserInput {
 
     public static Scanner sc = new Scanner(System.in);
 
+    // TODO check readDate format dd-mm-yyyy
     /**
      * List ein Datum vom Benutzer ein
      * @return Datum was vom Benutzer eingelesen wurde, wurde kein richtiges Datum vom Benutzer eingegeben so wird das heute Datum zurück gegeben
@@ -35,68 +37,18 @@ public class UserInput {
     public String readString() {
         return sc.nextLine();
     }
-
-
     /**
      * Liste einen long von der Konsole ein, wird so lange wiederholt bis der Nutzer einen gültigen wert eingibt
      * @return Long den ein Nutzer eingegeben hat
      *
      */
-    public Long readLong(){
-        boolean rightinput;
-        long i = 0;
-        do {
-            try{
-                rightinput=true;
-                i = sc.nextInt();
-                sc.nextLine();
-            }catch (InputMismatchException e){
-                System.out.println("Keine gültige Eingabe");
-                rightinput=false;
-                sc.nextLine();
-            }
-        }while (!rightinput);
-        return i;
+    public long readLong(){
+        return (long) Helpers.readAndValidateNumber(sc);
     }
 
 
     public int readInt() {
-        boolean rightinput;
-        int i = 0;
-
-        do {
-            try{
-                rightinput = true;
-                i = sc.nextInt();
-                sc.nextLine();
-            }catch (InputMismatchException e){
-                System.out.println("Keine gültige Eingabe");
-                rightinput=false;
-                sc.nextLine();
-            }
-        }while (!rightinput);
-        return i;
-    }
-
-    public void printMenu(String[] options) {
-        String placeholder = "-".repeat(23);
-        System.out.printf("%s%s%s%n", placeholder, "TKKG-Streaming-Database", placeholder);
-        System.out.printf("|   %-64s|%n", options[0]);
-        for (int i = 1; i < options.length; i++) {
-            System.out.printf("|   (%d) %-60s|%n", i, options[i]);
-        }
-        System.out.println("-".repeat(69));
-        System.out.print("Auswahl:  ");
-    }
-
-    /**
-     * Timestamp vom Nutzer einzulesen ist sehr nervig. Deswegen wird einfach die aktuelle Zeit als PLatzhalter an
-     * dieser Stelle eingefügt.
-     * @return
-     */
-    public java.sql.Timestamp readTimestamp(){
-        System.out.println("Timestamp wird automatisch auf jetzige Zeit gesetzt!");
-        return new java.sql.Timestamp(System.currentTimeMillis());
+        return (int) Helpers.readAndValidateNumber(sc);
     }
 
     public String readChar() {
