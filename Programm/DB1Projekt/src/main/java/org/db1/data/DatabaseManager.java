@@ -6,8 +6,8 @@ import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.StringJoiner;
 
-// TODO refactor
 
 /**
  *Managed die Datenbank die ihm im Init übergeben wurde.
@@ -106,15 +106,13 @@ public class DatabaseManager {
                     Method userInputMethod = dbInit.getUserInputMethod(type);
 
                     sql.invoke(statement, i + 1, userInputMethod.invoke(userInput));
-                    //statement.setString(3, userInput.scan());
-
                 }
             }
             System.out.println(statement.executeUpdate() == 1 ? "Erfolgreich eingefügt" : "Bitte überprüfe deine Eingabe, da kann etwas nicht stimmmen! (Tabelle wurde nicht verändert)");
         } catch (SQLException e) {
             statementFactory.handleSqlException(e);
         } catch (InvocationTargetException | IllegalAccessException ignored) {
-
+            ignored.printStackTrace();
         }
     }
 
@@ -131,6 +129,7 @@ public class DatabaseManager {
 
             HashMap<Integer, MetaData> colNamesNTypes = dbInit.getColNamesNTypes(table);
             PreparedStatement statement = statementFactory.buildUpdateStatement(table);
+
             ArrayList<MetaData> primaryKeys = new ArrayList<>();
             int statementCount = 1;
 
@@ -179,11 +178,13 @@ public class DatabaseManager {
 
         }
     }
+
     /**
      * Es werden die Rekursiven Aufrufe(ModeratorID(ID)) in der Tabelle Accounts und gruppiert nach Username gezä.
      * Create a PreparedStatement statically and extracts the Data from ACCOUNTS
      * and print it.
      */
+
     public void countRecusriveFromAccounts() {
         try {
             System.out.println("---RECURSIVE COUNT FROM ACCOUNTS---");

@@ -5,6 +5,10 @@ import org.db1.data.StatementFactory;
 import org.db1.ui.Menu;
 
 
+// TODO refactor Database Manager
+// TODO clean code i.e. readable variable names
+// TODO check other relations cascade delete
+
 /** Bei Unserem Projekt geht es um ein Online-Marktplatz wie bspw. ebay wir haben uns für einen Online-Marktplatz für Tiere entschieden<br>
  * Das Programm erzeugt dynamisch insert delete und show Querys für eine Datenbank damit sich Kunden für Tierscout24 (der Name unsere Website) anmelden können. <br>
  * @author Tabias Barthold Matrikelnummer: 7209370 <br>
@@ -12,7 +16,6 @@ import org.db1.ui.Menu;
  * @author Yusuf Bas Matrikelnummer: 7209349<br>
  * @version 1.0 benutzt wurde Intelij
  */
-// TODO clean code i.e. readable variable names
 public class Main {
     /**
      * Datenbankverbindung wird hier aufgebaut <br>

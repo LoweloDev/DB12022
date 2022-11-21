@@ -16,7 +16,6 @@ public class UserInput {
 
     public static Scanner sc = new Scanner(System.in);
 
-    // TODO check readDate format dd-mm-yyyy
     /**
      * List ein Datum vom Benutzer ein
      * @return Datum was vom Benutzer eingelesen wurde, wurde kein richtiges Datum vom Benutzer eingegeben so wird das heute Datum zurück gegeben
@@ -24,6 +23,8 @@ public class UserInput {
     public Date readDate() {
         System.out.print("Bitte geben Sie ein Datum ein (TT.MM.YYYY): ");
         String date = sc.nextLine();
+        // neue Zeile
+        System.out.println();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
         try {
             java.util.Date date1 = dateFormat.parse(date);
@@ -43,7 +44,7 @@ public class UserInput {
      *
      */
     public long readLong(){
-        return (long) Helpers.readAndValidateNumber(sc);
+        return Long.valueOf((Integer) Helpers.readAndValidateNumber(sc));
     }
 
 

@@ -6,6 +6,7 @@ import java.io.*;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 
 public class Database {
@@ -28,36 +29,49 @@ public class Database {
 
         try {
             connection = DriverManager.getConnection(url, user, pass);
-            Class.forName("oracle.jdbc.driver.OracleDriver");
+
+            preventDropException(connection);
+
             Database.dropAndCreate(connection);
-        } catch (SQLException | ClassNotFoundException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
         }
-
-
 
         return connection;
     }
 
-    // TODO create Tables before running script
+    private static void preventDropException(Connection connection) {
+        try {
+            Statement statement = connection.createStatement();
+            String[] tablenames = {"unternehmen", "kategorie", "einkaufswagen", "nutzer", "produkt", "einkaufswagen_produkt", "nutzer_einkaufswagen", "kategorie_business", "bestellung", "bestellung_produkt"};
+
+            for (String tablename : tablenames) {
+                String query = "CREATE TABLE " + tablename + "( id INTEGER NOT NULL PRIMARY KEY )";
+                statement.execute(query);
+            }
+        } catch (Exception ignored) {}
+    }
+
+    /**
+     * Diese Methode wird initialisiert, um die im SQL angewendeten Drop und create methoden zu nutzen.<br>
+     * Mit drop werden die Tabellen gelöscht und mit Create werden die Tabellen wieder erstellt.<br>
+     *
+     */
     private static void dropAndCreate(Connection connection) {
         try {
             ScriptRunner scriptRunner = new ScriptRunner(connection, false, true);
             String filePath = new File("").getAbsolutePath();
             filePath = filePath.concat("\\src\\main\\java\\org\\db1\\data\\db_init.sql");
 
-            System.out.println("PFAD");
-            System.out.println(filePath);
-
             Reader reader = new BufferedReader(new FileReader(filePath));
             scriptRunner.runScript(reader);
+
+            System.out.println();
+            System.out.println("DROPPPED AND RECREATED DATABASE SUCCESSFULLY");
+            System.out.println();
         } catch (Exception e) {
             e.printStackTrace();
         }
-        /**
-         * Diese Methode wird initialisiert, um die im SQL angewendeten Drop und create methoden zu nutzen.<br>
-         * Mit drop werden die Tabellen gelöscht und mit Create werden die Tabellen wieder erstellt.<br>
-         *
-         */
+
     }
 }

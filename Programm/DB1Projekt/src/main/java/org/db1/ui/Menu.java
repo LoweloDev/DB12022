@@ -29,7 +29,7 @@ public class Menu {
             printMenu("Welche Tabelle wollen Sie bearbeiten?", menuItems.toArray(new String[0]));
             inputNumber = statementFactory.getUserInput().readInt();
 
-            if(inputNumber < Helpers.lastIndexOf(menuItems) && inputNumber >= 1) {
+            if(inputNumber < Helpers.lastIndexOf(menuItems) && inputNumber >= 0) {
                 String tabellenName = menuItems.get(inputNumber);
                 tableMenuDefault(tabellenName);
             } else if(inputNumber != Helpers.lastIndexOf(menuItems)) {
@@ -65,7 +65,7 @@ public class Menu {
         for (int i = 0; i < items.length; i++) {
             System.out.printf("%d) %s \n", i, items[i]);
         }
-        System.out.print("Auswahl:  ");
+        System.out.print("Auswahl:  \n");
     }
 
     public void close() {

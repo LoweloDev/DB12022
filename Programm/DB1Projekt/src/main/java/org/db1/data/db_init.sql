@@ -3,7 +3,6 @@
     Tobias Barthold     7209370
     Yusuf Bas           7209349 */
 
--- TODO IF else drop table or try catch --
 DROP TABLE unternehmen CASCADE CONSTRAINTS  PURGE;
 DROP TABLE kategorie CASCADE CONSTRAINTS  PURGE;
 DROP TABLE einkaufswagen CASCADE CONSTRAINTS  PURGE;
@@ -29,10 +28,10 @@ CREATE TABLE kategorie
 (
     id              INTEGER     NOT NULL PRIMARY KEY,
     name            varchar(24) NOT NULL,
-    bild            BLOB,
+    bild            varchar(64),
     subkategorie_id INTEGER DEFAULT NULL,
-    -- TODO check whether delete cascade on subcategory deletes main category
-    FOREIGN KEY (subkategorie_id) REFERENCES kategorie (id) ON DELETE CASCADE
+
+    FOREIGN KEY (subkategorie_id) REFERENCES kategorie (id) ON DELETE SET NULL
 );
 
 CREATE TABLE einkaufswagen
@@ -119,7 +118,7 @@ CREATE TABLE bestellung_produkt
 INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban)
 values (1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE5044050199350280');
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
-values (1, 'Mathias Stark', EMPTY_BLOB(), NULL);
+values (1, 'Mathias Stark', 'C:\Bilder\', NULL);
 INSERT INTO einkaufswagen(id, anzahl)
 values (1, 0);
 INSERT INTO nutzer(id, vorname, nachname, anrede, mail, iban)
