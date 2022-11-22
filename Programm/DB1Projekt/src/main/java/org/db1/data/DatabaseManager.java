@@ -6,50 +6,48 @@ import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.StringJoiner;
 
 
 /**
- *Managed die Datenbank die ihm im Init übergeben wurde.
+ * Erlaubt die Verwaltung unserer Datenbank.
  */
 
 public class DatabaseManager {
     private final UserInput userInput;
-    private final Init dbInit;
+    private final Mapper dbMapper;
     private final StatementFactory statementFactory;
 
     /**
-     * Es wir über den Konstruktor eine neue UserInput instanz angelegt um die Inputs des Users zu verwalten <br>
-     * und eine neue db.init instanz um eine Verbindung zu Datenbank aufzubauen.
      * @param url der Connection
      * @param user der Conected
      * @param pass um zu Conection
+     * Es wird eine UserInput Instanz angelegt um den UserInput zu verarbeiten in Kombination mit den Hashmaps bei denen die Methoden dazu auf bestimmte Datentypen von SQL gemapped wurden.
+     * Es wird eine Instanz von unserem Mapper aufgerufen um die korrekte UserInput methode basierend auf dem Datentypen auswählen können.
+     * Es wird eine Instanz der StatementFactory angelegt damit wir unsere SQL Queries zusammenbauen lassen können.
      */
 
     public DatabaseManager(String url, String user, String pass) {
         userInput = new UserInput();
-        dbInit = Init.getInstance(url, user, pass);
+        dbMapper = Mapper.getInstance(url, user, pass);
         statementFactory = new StatementFactory(url, user, pass);
     }
 
+
     /**
-     * Executed ein SelectStatement, das Dynamisch aus table attribute einliest.
-     * After executing a Prepared Statement from @
-     * a set method and input scanner is determined through the corresponding methods in:
-     * link{#getColNamesNTypes(String)},
-     * Null cases are optional and do not to be inputted
-     * @param table der Tabellenname aus den etwas gelöscht werden soll
+     *
+     * @param table
+     * Konsumiert einen Tabellennamen, holt sich dann über einen SQL query die Tabelle und deren Daten und printed diese in die Konsole.
      */
 
     public void showTable(String table) {
         try {
             PreparedStatement statement = statementFactory.buildShowAllStatement(table);
-            ResultSet rs = statement.executeQuery();
+            ResultSet resultSet = statement.executeQuery();
 
 
-            int columns = rs.getMetaData().getColumnCount();
+            int columns = resultSet.getMetaData().getColumnCount();
             for (int i = 1; i <= columns; i++) {
-                System.out.printf("%-20s", rs.getMetaData().getColumnLabel(i));
+                System.out.printf("%-20s", resultSet.getMetaData().getColumnLabel(i));
 }
             System.out.println();
 
@@ -59,9 +57,9 @@ public class DatabaseManager {
 
             System.out.println();
 
-            while (rs.next()) {
+            while (resultSet.next()) {
                 for (int i = 1; i <= columns; i++) {
-                    System.out.printf("%-20s", rs.getString(i));
+                    System.out.printf("%-20s", resultSet.getString(i));
                 }
                 System.out.println();
             }
@@ -71,17 +69,15 @@ public class DatabaseManager {
     }
 
     /**
-     * Executed ein InsertStatement, das Dynamisch aus table A einliest.
-     * a set method and input scanner is determined through the corresponding methods in:
-     * link{#getColNamesNTypes(String)},
-     * and executes them through the invoke method
-     * Null cases are optional and do not to be inputted.
-     * @param table der Tabellenname aus den etwas Gelöscht werden soll
+     * Die Methode konsumiert einen Tabellennamen und holt sich damit alle Datenttypen und Namen von Spalten der Tabelle und baut die Vorbereitung des Insert Statement fertig.
+     * Dann werden einmal über alle Spalten iteriert und die Nutzereingabe gefordert.
+     * Mittels der Nutzereingabe werden dann dynamisch die Methoden ausgeführt die wir über den Datenttyp der jeweiligen Spalte durch die Vorbereitung im Mapper bekommen haben.
+     * @param table
      */
     public void insertIntoTable(String table) {
         try {
 
-            HashMap<Integer, MetaData> colNamesNTypes = dbInit.getColNamesNTypes(table);
+            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColNamesNTypes(table);
             PreparedStatement statement = statementFactory.buildInsertStatement(table);
 
             for (int i = 0; i < colNamesNTypes.size(); i++) {
@@ -101,11 +97,11 @@ public class DatabaseManager {
                 } else {
                     System.out.println("Bitte geben Sie " + rowName + " ein. ");
 
-                    Method sql = dbInit.getSQLMethodInsert(type);
+                    Method setParameterInStatement = dbMapper.getStatementSetMethod(type);
 
-                    Method userInputMethod = dbInit.getUserInputMethod(type);
+                    Method readMethod = dbMapper.getInputReadMethod(type);
 
-                    sql.invoke(statement, i + 1, userInputMethod.invoke(userInput));
+                    setParameterInStatement.invoke(statement, i + 1, readMethod.invoke(userInput));
                 }
             }
             System.out.println(statement.executeUpdate() == 1 ? "Erfolgreich eingefügt" : "Bitte überprüfe deine Eingabe, da kann etwas nicht stimmmen! (Tabelle wurde nicht verändert)");
@@ -117,17 +113,15 @@ public class DatabaseManager {
     }
 
     /**
-     * Executed ein UpdateStatement, das Dynamisch aus table attribute einliest.
-     * a set method and input scanner is determined through the corresponding methods in:
-     * link{#getColNamesNTypes(String)},
-     * and executes them through the invoke method
-     * Null cases are optional and do not to be inputted.
+     * Konsumiert Tabellennamen und holt sich damit alle Spalten und deren Datenttypen und bereitet das Update-Statement über die StatementFactory vor.
+     * Mittels diese Datenttypen werden dann die korrekten SET Methoden für das Statement sowie READ Methoden für die Nutzereingabe ausgewählt. Möglich durch die Vorbereitung im Mapper.
+     * Iteriert über alle Spalten und fragt für diese die Nutzereingabe an.
      * @param table der Tabellenname aus den etwas Gelöscht werden soll
      */
     public void updateTable(String table){
         try{
 
-            HashMap<Integer, MetaData> colNamesNTypes = dbInit.getColNamesNTypes(table);
+            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColNamesNTypes(table);
             PreparedStatement statement = statementFactory.buildUpdateStatement(table);
 
             ArrayList<MetaData> primaryKeys = new ArrayList<>();
@@ -153,8 +147,8 @@ public class DatabaseManager {
                         primaryKeys.add(data);
                     } else {
                         System.out.println("Bitte geben Sie " + rowName + " ein. ");
-                        Method sql = dbInit.getSQLMethodInsert(type);
-                        Method userInputMethod = dbInit.getUserInputMethod(type);
+                        Method sql = dbMapper.getStatementSetMethod(type);
+                        Method userInputMethod = dbMapper.getInputReadMethod(type);
                         Object input = userInputMethod.invoke(userInput);
 
                         sql.invoke(statement, statementCount++, input);
@@ -164,8 +158,8 @@ public class DatabaseManager {
 
             for (int i = 0; i < primaryKeys.size(); i++) {
                 System.out.println(primaryKeys.get(i).getName() + " vom zu bearbeitenden " + table + " eingeben: ");
-                Method sql = dbInit.getSQLMethodInsert(primaryKeys.get(i).getTypeName());
-                Method userInputMethod = dbInit.getUserInputMethod(primaryKeys.get(i).getTypeName());
+                Method sql = dbMapper.getStatementSetMethod(primaryKeys.get(i).getTypeName());
+                Method userInputMethod = dbMapper.getInputReadMethod(primaryKeys.get(i).getTypeName());
                 Object input = userInputMethod.invoke(userInput);
                 sql.invoke(statement, statementCount++, input);
             }
@@ -180,39 +174,14 @@ public class DatabaseManager {
     }
 
     /**
-     * Es werden die Rekursiven Aufrufe(ModeratorID(ID)) in der Tabelle Accounts und gruppiert nach Username gezä.
-     * Create a PreparedStatement statically and extracts the Data from ACCOUNTS
-     * and print it.
-     */
-
-    public void countRecusriveFromAccounts() {
-        try {
-            System.out.println("---RECURSIVE COUNT FROM ACCOUNTS---");
-            StringBuilder recursiveOutput = new StringBuilder();
-            String statement = "SELECT a.username, COUNT(*) FROM accounts a, accounts b WHERE a.id=b.moderatorid GROUP BY a.username";
-            PreparedStatement stmt = dbInit.getCon().prepareStatement(statement);
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                String result = "Moderator: " + rs.getString(1) +" | ModeratorCount: " + rs.getInt(2);
-                recursiveOutput.append(result).append("\n");
-            }
-            System.out.println(recursiveOutput);
-        } catch (SQLException e) {
-            statementFactory.handleSqlException(e);
-        }
-    }
-    /**
-     * Executed ein DeleteStatement, das Dynamisch aus table attribute einliest
-     * a set method and input scanner is determined throught the corresponing methods in:
-     * link{#getColNamesNTypes(String)},
-     * and executes them through the invoke method
-     * @param table der Tabellenname aus den etwas Gelöscht werden soll
+     * Löscht einen Eintrag aus einer Tabelle.
+     * Dazu wird einmal über die Spalten und Datentypen iteriert und für Primary-Keys eine Nutzereingabe gefordert.
+     * @param table
      */
     public void deleteFromTable(String table) {
         try {
-            HashMap<Integer, MetaData> colNamesNTypes = dbInit.getColNamesNTypes(table);
+            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColNamesNTypes(table);
             PreparedStatement statement = statementFactory.buildDeleteStatement(table);
-            StringBuilder sb = new StringBuilder();
             System.out.println("---LÖSCHE AUS " + table + "---");
             int statementCount = 1;
 
@@ -222,8 +191,8 @@ public class DatabaseManager {
                     String type = colNamesNTypes.get(i).getTypeName();
 
                     System.out.println("Bitte geben Sie " + rowName + " ein vom zu löschendem " + table);
-                    Method sql = dbInit.getSQLMethodInsert(type);
-                    Method userInputMethod = dbInit.getUserInputMethod(type);
+                    Method sql = dbMapper.getStatementSetMethod(type);
+                    Method userInputMethod = dbMapper.getInputReadMethod(type);
                     Object input = userInputMethod.invoke(userInput);
 
                     sql.invoke(statement, statementCount++, input);

@@ -11,15 +11,15 @@ import java.util.HashMap;
 
 public class StatementFactory {
     private UserInput userInput;
-    private Init dbInit;
+    private Mapper dbMapper;
 
     public StatementFactory(String url, String user, String pass) {
         userInput = new UserInput();
-        dbInit = Init.getInstance(url,user,pass);
+        dbMapper = Mapper.getInstance(url,user,pass);
     }
 
     public PreparedStatement buildInsertStatement(String table) throws SQLException{
-        HashMap<Integer, MetaData> meta = dbInit.getColNamesNTypes(table);
+        HashMap<Integer, MetaData> meta = dbMapper.getColNamesNTypes(table);
         StringBuilder sb = new StringBuilder();
         sb.append("INSERT INTO ").append(table).append(" VALUES(");
         sb.append("?");
@@ -29,11 +29,11 @@ public class StatementFactory {
         sb.append(")");
         System.out.println(sb);
 
-        return dbInit.getCon().prepareStatement(sb.toString());
+        return dbMapper.getCon().prepareStatement(sb.toString());
     }
 
     public PreparedStatement buildUpdateStatement(String table) throws SQLException{
-        HashMap<Integer, MetaData> meta = dbInit.getColNamesNTypes(table);
+        HashMap<Integer, MetaData> meta = dbMapper.getColNamesNTypes(table);
         boolean first = true;
         StringBuilder sb = new StringBuilder();
         ArrayList<String> primaryKeys = new ArrayList<>();
@@ -59,12 +59,12 @@ public class StatementFactory {
             }
         }
         System.out.println(sb);
-        return dbInit.getCon().prepareStatement(sb.toString());
+        return dbMapper.getCon().prepareStatement(sb.toString());
     }
 
     public PreparedStatement buildDeleteStatement(String table) throws SQLException{
         boolean first = true;
-        HashMap<Integer, MetaData> meta = dbInit.getColNamesNTypes(table);
+        HashMap<Integer, MetaData> meta = dbMapper.getColNamesNTypes(table);
         StringBuilder sb = new StringBuilder();
         sb.append("DELETE FROM ").append(table).append(" WHERE ");
         for (int i = 0; i < meta.size(); i++) {
@@ -76,11 +76,11 @@ public class StatementFactory {
             }
         }
 
-        return dbInit.getCon().prepareStatement(sb.toString());
+        return dbMapper.getCon().prepareStatement(sb.toString());
     }
 
     public PreparedStatement buildShowAllStatement(String table) throws SQLException{
-        HashMap<Integer, MetaData> meta = dbInit.getColNamesNTypes(table);
+        HashMap<Integer, MetaData> meta = dbMapper.getColNamesNTypes(table);
         StringBuilder statement = new StringBuilder();
         statement.append("SELECT * FROM ").append(table).append(" ORDER BY ");
         for (int i = 0; i < meta.size(); i++) {
@@ -91,7 +91,7 @@ public class StatementFactory {
                 break;
             }
         }
-        return dbInit.getCon().prepareStatement(statement.toString());
+        return dbMapper.getCon().prepareStatement(statement.toString());
     }
 
     public UserInput getUserInput() {
@@ -102,8 +102,8 @@ public class StatementFactory {
      * @return returns dbInit
      */
 
-    public Init getDbInit() {
-        return dbInit;
+    public Mapper getDbInit() {
+        return dbMapper;
     }
 
     public void handleSqlException(SQLException e) {
@@ -130,7 +130,7 @@ public class StatementFactory {
     }
 
     public void close() {
-        dbInit.close();
+        dbMapper.close();
         userInput.close();
     }
 }

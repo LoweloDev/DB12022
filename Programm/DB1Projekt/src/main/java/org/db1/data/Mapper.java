@@ -5,65 +5,67 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-public class Init {
-    private final HashMap<String, Method> methodByTypeSQLInsert;
-    private final HashMap<String, Method> methodByTypeUI;
-    private final HashMap<String, Method> methodByTypeSQLGet;
+/**
+ * Mapped SQL-Datentypen auf SET, GET und READ Methoden von verschiedenen Klassen.
+ */
+public class Mapper {
+    private final HashMap<String, Method> statementSetMethodByType;
+    private final HashMap<String, Method> inputReadMethodByType;
+    private final HashMap<String, Method> resultGetMethodByType;
     private final HashMap<String, HashMap<Integer, MetaData>> tableData;
     private final ArrayList<String> tableNames;
-    private Connection con;
-    private static Init instance;
+    private final Connection connection;
+    private static Mapper instance;
 
     /**
      * @param url Url der Datenbank mit der sich verbunden werden soll
      * @param user User mit dem sich in der Datenbank eingeloggt werden soll
      * @param pass Passwort des Benutzers der Datenbank
-     * <code>DatabaseInit</code> initialisierung der Verbindung und arbeitsnotwendigen Daten
+     * <code>Mapper</code> erstellt Bequemlichkeits-Assoziationen von Klassen und Methoden.
      */
-    public Init(String url, String user, String pass) {
+    private Mapper(String url, String user, String pass) {
         this.tableNames = new ArrayList<>();
         this.tableData = new HashMap<>();
-        this.methodByTypeSQLInsert = new HashMap<>();
-        this.methodByTypeUI = new HashMap<>();
-        this.methodByTypeSQLGet = new HashMap<>();
+        this.statementSetMethodByType = new HashMap<>();
+        this.inputReadMethodByType = new HashMap<>();
+        this.resultGetMethodByType = new HashMap<>();
 
-        con = Database.getInstance(url, user, pass);
+        connection = Database.getInstance(url, user, pass);
         initTableNames();
-        initMethodSet();
+        connectDatatypesWithMethods();
     }
 
-    public static Init getInstance(String url, String user, String pass) {
-        if (instance == null) instance = new Init(url, user, pass);
+    public static Mapper getInstance(String url, String user, String pass) {
+        if (instance == null) instance = new Mapper(url, user, pass);
 
         return instance;
     }
 
-    private void initMethodSet(){
+    private void connectDatatypesWithMethods(){
         try {
-            methodByTypeUI.put("NUMBER", UserInput.class.getMethod("readLong"));
-            methodByTypeUI.put("VARCHAR2", UserInput.class.getMethod("readString"));
-            methodByTypeUI.put("DATE", UserInput.class.getMethod("readDate"));
-            methodByTypeUI.put("CHAR", UserInput.class.getMethod("readChar"));
+            inputReadMethodByType.put("NUMBER", UserInput.class.getMethod("readLong"));
+            inputReadMethodByType.put("VARCHAR2", UserInput.class.getMethod("readString"));
+            inputReadMethodByType.put("DATE", UserInput.class.getMethod("readDate"));
+            inputReadMethodByType.put("CHAR", UserInput.class.getMethod("readChar"));
 
-            methodByTypeSQLInsert.put("NUMBER", PreparedStatement.class.getMethod("setLong", int.class, long.class));
-            methodByTypeSQLInsert.put("VARCHAR2", PreparedStatement.class.getMethod("setString", int.class, String.class));
-            methodByTypeSQLInsert.put("DATE", PreparedStatement.class.getMethod("setDate", int.class, Date.class));
-            methodByTypeSQLInsert.put("CHAR", PreparedStatement.class.getMethod("setString", int.class, String.class));
+            statementSetMethodByType.put("NUMBER", PreparedStatement.class.getMethod("setLong", int.class, long.class));
+            statementSetMethodByType.put("VARCHAR2", PreparedStatement.class.getMethod("setString", int.class, String.class));
+            statementSetMethodByType.put("DATE", PreparedStatement.class.getMethod("setDate", int.class, Date.class));
+            statementSetMethodByType.put("CHAR", PreparedStatement.class.getMethod("setString", int.class, String.class));
 
-            methodByTypeSQLGet.put("NUMBER", ResultSet.class.getMethod("getLong", int.class));
-            methodByTypeSQLGet.put("VARCHAR2", ResultSet.class.getMethod("getString", int.class));
-            methodByTypeSQLGet.put("DATE", ResultSet.class.getMethod("getDate", int.class));
-            methodByTypeSQLGet.put("CHAR", ResultSet.class.getMethod("getString", int.class));
-
+            resultGetMethodByType.put("NUMBER", ResultSet.class.getMethod("getLong", int.class));
+            resultGetMethodByType.put("VARCHAR2", ResultSet.class.getMethod("getString", int.class));
+            resultGetMethodByType.put("DATE", ResultSet.class.getMethod("getDate", int.class));
+            resultGetMethodByType.put("CHAR", ResultSet.class.getMethod("getString", int.class));
         } catch (Exception ignored) {}
     }
 
     private void initTableNames(){
         try {
 
-            DatabaseMetaData tables = con.getMetaData();
+            DatabaseMetaData tables = connection.getMetaData();
 
-            ResultSet dbResult = tables.getTables(con.getCatalog(), con.getSchema(), "%", null);
+            ResultSet dbResult = tables.getTables(connection.getCatalog(), connection.getSchema(), "%", null);
 
             while (dbResult.next()) {
                 tableNames.add(dbResult.getString(3));
@@ -83,7 +85,7 @@ public class Init {
 
     private ArrayList<String> getPrimaryKeys(String tableName) throws Exception{
         DatabaseMetaData tables = getCon().getMetaData();
-        ResultSet primaryKeys = tables.getPrimaryKeys(con.getCatalog(), con.getSchema(), tableName);
+        ResultSet primaryKeys = tables.getPrimaryKeys(connection.getCatalog(), connection.getSchema(), tableName);
 
         ArrayList<String> primaryKeysList = new ArrayList<>();
         while (primaryKeys.next()) {
@@ -100,7 +102,7 @@ public class Init {
         try {
             ArrayList<String> primaryKeysList = getPrimaryKeys(tableName);
             String statement = "SELECT * FROM " + tableName;
-            PreparedStatement stmt = con.prepareStatement(statement);
+            PreparedStatement stmt = connection.prepareStatement(statement);
 
             ResultSet rs = stmt.executeQuery();
             ResultSetMetaData metaData = rs.getMetaData();
@@ -123,19 +125,19 @@ public class Init {
     }
 
     public Connection getCon() {
-        return con;
+        return connection;
     }
 
-    public Method getSQLMethodInsert(String dataType) {
-        return methodByTypeSQLInsert.get(dataType);
+    public Method getStatementSetMethod(String dataType) {
+        return statementSetMethodByType.get(dataType);
     }
 
-    public Method getSQLMethodGet(String dataType) {
-        return methodByTypeSQLGet.get(dataType);
+    public Method getResultGetMethod(String dataType) {
+        return resultGetMethodByType.get(dataType);
     }
 
-    public Method getUserInputMethod(String dataType) {
-        return methodByTypeUI.get(dataType);
+    public Method getInputReadMethod(String dataType) {
+        return inputReadMethodByType.get(dataType);
     }
 
     public HashMap<Integer, MetaData> getColNamesNTypes(String table){
@@ -148,7 +150,7 @@ public class Init {
 
     public void close() {
         try {
-            con.close();
+            connection.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

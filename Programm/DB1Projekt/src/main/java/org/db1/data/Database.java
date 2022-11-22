@@ -9,11 +9,24 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 
+/**
+ * Stellt Datenbankverbindung her und bietet Startoptionen an bspw. Drop and Create.
+ */
 public class Database {
     private static Connection instance;
 
+    /**
+     *
+     * @param url
+     * @param user
+     * @param password
+     * @return instanceOfDatabase
+     *
+     * Erstellt eine Instanz der Datenbankverbindung, wenn noch nicht vorhanden. (Singleton Pattern)
+     */
+
     public static Connection getInstance(String url, String user, String password) {
-        if (instance == null) instance = initConnection(url, user, password);
+        if (instance == null) instance = connect(url, user, password);
 
         return instance;
     }
@@ -22,17 +35,17 @@ public class Database {
      * @param url
      * @param user
      * @param pass
-     * Initialisierung der Verbindung mittels url, username und password und entsprechendem Treiber
+     * Verbindet mit dem Datenbank-Server
      */
-    private static Connection initConnection(String url, String user, String pass){
+    private static Connection connect(String url, String user, String pass){
         Connection connection = null;
 
         try {
             connection = DriverManager.getConnection(url, user, pass);
 
             preventDropException(connection);
-
             Database.dropAndCreate(connection);
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -40,6 +53,14 @@ public class Database {
         return connection;
     }
 
+    /**
+     *
+     * @param connection
+     *
+     * Präventiert die Exceptions die geschmissen werden, wenn veruscht wird ein Table zu Droppen der nicht vorhanden ist.
+     * Für das Installationsskript und dessen wiederholte ausführbarkeit ist diese Exception belanglos, für Java jedoch nicht.
+     * Wir erstellen die Datenbank aus bequemlichkeit bei jedem Start des Java-Programms neu.
+     */
     private static void preventDropException(Connection connection) {
         try {
             Statement statement = connection.createStatement();
@@ -53,9 +74,10 @@ public class Database {
     }
 
     /**
-     * Diese Methode wird initialisiert, um die im SQL angewendeten Drop und create methoden zu nutzen.<br>
-     * Mit drop werden die Tabellen gelöscht und mit Create werden die Tabellen wieder erstellt.<br>
      *
+     * @param connection
+     *
+     * Löscht und erstellt die Tabellen neu und befüllt sie mit Dummy-Daten
      */
     private static void dropAndCreate(Connection connection) {
         try {
