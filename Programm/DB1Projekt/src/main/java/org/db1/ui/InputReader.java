@@ -8,21 +8,21 @@ import java.text.SimpleDateFormat;
 import java.util.Scanner;
 
 /**
- * Kann UserInput lesen welcher für Datenbank Values benötigt wird
+ * Liest Nutzereingaben
  * @see java.sql.Types
  */
 
-public class UserInput {
+public class InputReader {
 
-    public static Scanner sc = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     /**
-     * List ein Datum vom Benutzer ein
-     * @return Datum was vom Benutzer eingelesen wurde, wurde kein richtiges Datum vom Benutzer eingegeben so wird das heute Datum zurück gegeben
+     * List ein Datum von der Konsole ein.
+     * @return <code>Date</code> Java Date-Objekt basierend auf der Datumseingabe des Nutzers
      */
     public Date readDate() {
         System.out.print("Bitte geben Sie ein Datum ein (TT.MM.YYYY): ");
-        String date = sc.nextLine();
+        String date = scanner.nextLine();
         // neue Zeile
         System.out.println();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd.mm.yyyy");
@@ -35,33 +35,48 @@ public class UserInput {
         }
     }
 
-    public String readString() {
-        return sc.nextLine();
-    }
     /**
-     * Liste einen long von der Konsole ein, wird so lange wiederholt bis der Nutzer einen gültigen wert eingibt
-     * @return Long den ein Nutzer eingegeben hat
+     * Liest simplen String von der Konsole ein.
+     * @return <code>String</code>
+     */
+    public String readString() {
+        return scanner.nextLine();
+    }
+
+    /**
+     * Liest long von der Konsole ein
+     * @return <code>long</code>
      *
      */
     public long readLong(){
-        return Long.valueOf((Integer) Helpers.readAndValidateNumber(sc));
+        return Long.valueOf((Integer) Helpers.readAndValidateNumber(scanner));
     }
 
-
+    /**
+     * Liest int von der Konsole ein
+     * @return <code>int</code>
+     */
     public int readInt() {
-        return (int) Helpers.readAndValidateNumber(sc);
+        return (int) Helpers.readAndValidateNumber(scanner);
     }
 
+    /**
+     * Liest char von der Konsole ein
+     * @return <code>String</code>
+     */
     public String readChar() {
         String eingabe;
         do {
             System.out.print("Bitte geben Sie einen character an: ");
-            eingabe = sc.nextLine();
+            eingabe = scanner.nextLine();
         } while (eingabe.length() != 1);
         return String.valueOf(eingabe.charAt(0));
     }
 
+    /**
+     * Schließt den Scanner
+     */
     public void close() {
-        sc.close();
+        scanner.close();
     }
 }

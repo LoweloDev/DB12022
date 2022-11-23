@@ -1,5 +1,5 @@
 package org.db1.data;
-import org.db1.ui.UserInput;
+import org.db1.ui.InputReader;
 import java.lang.reflect.Method;
 import java.sql.*;
 import java.util.ArrayList;
@@ -18,9 +18,9 @@ public class Mapper {
     private static Mapper instance;
 
     /**
-     * @param url Url der Datenbank mit der sich verbunden werden soll
-     * @param user User mit dem sich in der Datenbank eingeloggt werden soll
-     * @param pass Passwort des Benutzers der Datenbank
+     * @param url Verbindungs-Url
+     * @param user Nutzername
+     * @param pass Passwort
      * <code>Mapper</code> erstellt Bequemlichkeits-Assoziationen von Klassen und Methoden.
      */
     private Mapper(String url, String user, String pass) {
@@ -31,22 +31,33 @@ public class Mapper {
         this.resultGetMethodByType = new HashMap<>();
 
         connection = Database.getInstance(url, user, pass);
-        initTableNames();
+        collectTableMetaData();
         connectDatatypesWithMethods();
     }
 
+    /**
+     * Erstellt eine Instanz von <code>Mapper</code> wenn noch keine existiert sonst returned es die existierende Instanz. (Singleton Pattern)
+     * @param url Verbindungs-Url
+     * @param user Nutzername
+     * @param pass Passwort
+     * @return instance of <Code>Mapper</Code>
+     */
     public static Mapper getInstance(String url, String user, String pass) {
         if (instance == null) instance = new Mapper(url, user, pass);
 
         return instance;
     }
 
+    /**
+     * Verbindet die SQL Datenttypen mit Methoden über Erstellung einer HashMap einmal mit den Methoden zum lesen der Nutzereingaben,
+     * mit den Methoden zum setzen der Parameter in einem Prepared Statement und zum holen der Werte aus einem ResultSet.
+     */
     private void connectDatatypesWithMethods(){
         try {
-            inputReadMethodByType.put("NUMBER", UserInput.class.getMethod("readLong"));
-            inputReadMethodByType.put("VARCHAR2", UserInput.class.getMethod("readString"));
-            inputReadMethodByType.put("DATE", UserInput.class.getMethod("readDate"));
-            inputReadMethodByType.put("CHAR", UserInput.class.getMethod("readChar"));
+            inputReadMethodByType.put("NUMBER", InputReader.class.getMethod("readLong"));
+            inputReadMethodByType.put("VARCHAR2", InputReader.class.getMethod("readString"));
+            inputReadMethodByType.put("DATE", InputReader.class.getMethod("readDate"));
+            inputReadMethodByType.put("CHAR", InputReader.class.getMethod("readChar"));
 
             statementSetMethodByType.put("NUMBER", PreparedStatement.class.getMethod("setLong", int.class, long.class));
             statementSetMethodByType.put("VARCHAR2", PreparedStatement.class.getMethod("setString", int.class, String.class));
@@ -60,7 +71,11 @@ public class Mapper {
         } catch (Exception ignored) {}
     }
 
-    private void initTableNames(){
+    /**
+     * Sammelt die Namen und Spaltennamen sowie Datenttypen von Tabellen um später damit dynamisch die korrekte Methode für den korrekten Datentypen aus den HashMaps zu holen und
+     * Queries vorzubereiten.
+     */
+    private void collectTableMetaData(){
         try {
 
             DatabaseMetaData tables = connection.getMetaData();
@@ -78,12 +93,18 @@ public class Mapper {
         }
 
         for (String tableName : tableNames) {
-            tableData.put(tableName, initColNamesNTypes(tableName));
+            tableData.put(tableName, collectColumnMetaData(tableName));
         }
 
     }
 
-    private ArrayList<String> getPrimaryKeys(String tableName) throws Exception{
+    /**
+     * Sammelt die Primary-Keys einer Tabelle und returned diese.
+     * @param tableName Tabellenname
+     * @return <code>ArrayList<\String></code> primaryKeysList
+     * @throws Exception
+     */
+    private ArrayList<String> getPrimaryKeys(String tableName) throws Exception {
         DatabaseMetaData tables = getCon().getMetaData();
         ResultSet primaryKeys = tables.getPrimaryKeys(connection.getCatalog(), connection.getSchema(), tableName);
 
@@ -95,7 +116,12 @@ public class Mapper {
         return primaryKeysList;
     }
 
-    private HashMap<Integer, MetaData> initColNamesNTypes(String tableName) {
+    /**
+     * Sammelt die Spaltennamen und Datentypen um sie in die Hashmap mit den korrekten Tabellennamen zu packen um später darauf dynamisch zugreifen zu könenn und dann wiederum die korrekten Methoden für den Datenttypen aus den weiteren Hashmaps ziehen zu können.
+     * @param tableName Tabellenname
+     * @return <code>HashMap</code>
+     */
+    private HashMap<Integer, MetaData> collectColumnMetaData(String tableName) {
 
         HashMap<Integer, MetaData> map = new HashMap<>();
 
@@ -124,30 +150,65 @@ public class Mapper {
         return map;
     }
 
+    /**
+     * Getter für die Datenbankverbindung.
+     * @return <code>Connection</code>
+     */
     public Connection getCon() {
         return connection;
     }
 
+    /**
+     * Getter für die korrekte SET Methode für <code>PreparedStatement</code>s.
+     * Holt aus der HashMap die korrekte SET Methode für den Datenttypen.
+     * @param dataType SQL-Datentyp bspw. CHAR
+     * @return <code>Method</code>
+     */
     public Method getStatementSetMethod(String dataType) {
         return statementSetMethodByType.get(dataType);
     }
 
+    /**
+     * Getter für die korrekte GET Methode für ResultSet Parameter nach erfolgtem Query auf Datenbank.
+     * Holt aus der HashMap die korrekte GET Methode für den Datentypen.
+     * @param dataType SQL-Datentyp bspw. CHAR
+     * @return <code>Method</code>
+     */
     public Method getResultGetMethod(String dataType) {
         return resultGetMethodByType.get(dataType);
     }
 
+    /**
+     * Getter für die korrekte READ Methode für Nutzereingaben basierend auf dem SQL Datentypen.
+     * Holt aus der HashMap die korrekte READ Methode für den jeweiligen Datentypen.
+     * @param dataType
+     * @return <code>Method</code>
+     */
     public Method getInputReadMethod(String dataType) {
         return inputReadMethodByType.get(dataType);
     }
 
-    public HashMap<Integer, MetaData> getColNamesNTypes(String table){
+    /**
+     * Getter für die Spalten-Metadaten.
+     * Holt durch angabe des Tables die Metadaten für die Spalten (Name und Datentyp).
+     * @param table Tabellenname
+     * @return <code>HashMap</code>
+     */
+    public HashMap<Integer, MetaData> getColumnMetaData(String table){
         return tableData.get(table);
     }
 
+    /**
+     * Getter für die Liste der Tabellennamen.
+     * @return <code>ArrayList</code>
+     */
     public ArrayList<String> getTableNames() {
         return tableNames;
     }
 
+    /**
+     * Schließt die Datenbankverbindung. Wird von anderen Close Methoden aufgerufen und zieht sich quasi rekursiv bis hier hin durch.
+     */
     public void close() {
         try {
             connection.close();

@@ -17,9 +17,9 @@ public class Database {
 
     /**
      *
-     * @param url
-     * @param user
-     * @param password
+     * @param url Verbindungs-Url
+     * @param user Nutzername
+     * @param password Passwort
      * @return instanceOfDatabase
      *
      * Erstellt eine Instanz der Datenbankverbindung, wenn noch nicht vorhanden. (Singleton Pattern)
@@ -32,9 +32,9 @@ public class Database {
     }
 
     /**
-     * @param url
-     * @param user
-     * @param pass
+     * @param url Verbindungs-Url
+     * @param user Nutzername
+     * @param pass Passwort
      * Verbindet mit dem Datenbank-Server
      */
     private static Connection connect(String url, String user, String pass){

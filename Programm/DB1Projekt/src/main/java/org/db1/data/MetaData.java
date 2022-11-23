@@ -1,7 +1,7 @@
 package org.db1.data;
 
 /**
- * Diese Klasse wrappt die benötigten Meta Daten von den verschiedenen Spalten
+ * Model für die MetaDaten von Tabellen um typisierung und leichten Zugriff zu sichern.
  */
 
 public class MetaData {
@@ -11,7 +11,14 @@ public class MetaData {
     private final boolean nullable;
     private final boolean primaryKey;
 
-
+    /**
+     * Konsumiert im Folgenden erklärte Parameter und gibt eine Instanz von <code>MetaData</code> zurück.
+     * @param name Name des Metadatensatzes bspw. Spaltenname
+     * @param type Datentyp bspw CHAR
+     * @param typeNo Datenttypummer
+     * @param nullable Gibt an ob der Datensatz nullable also optional ist
+     * @param primaryKey Gibt an ob der Datensatz ein Primary Key ist
+     */
     public MetaData(String name, String type, int typeNo, boolean nullable, boolean primaryKey) {
         this.name = name;
         this.typeName = type;

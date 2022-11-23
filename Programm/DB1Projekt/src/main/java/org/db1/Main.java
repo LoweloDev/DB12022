@@ -5,9 +5,9 @@ import org.db1.data.StatementFactory;
 import org.db1.ui.Menu;
 
 
-// TODO Doku clean code i.e. readable variable names & Klassendiagramm
+// TODO Klassendiagramm
 // TODO TEst ilias
-// TODO refactor Database Manager
+// TODO refactor DBManager
 
 /** Bei Unserem Projekt geht es um ein Online-Marktplatz wie bspw. ebay wir haben uns für einen Online-Marktplatz für Tiere entschieden<br>
  * Das Programm erzeugt dynamisch insert delete und show Querys für eine Datenbank damit sich Kunden für Tierscout24 (der Name unsere Website) anmelden können. <br>
@@ -18,12 +18,11 @@ import org.db1.ui.Menu;
  */
 public class Main {
     /**
-     * Datenbankverbindung wird hier aufgebaut <br>
-     *<code>Url</code> Bitte hier mit der URL der Datenbank ersetzen<br>
-     *<code>User</code> Bitte hier mit dem Username ersetzen mit dem sich auf der Datenbank eingeloggt werden soll<br>
-     * <code>Pass</code> Bitte hier mit dem Passwort des Users der Datenbank ersetzen <br>
+     * Datenbankverbindung<br>
+     *<code>Url</code> Bitte mit URL der Datenbank ersetzen und ggf. vorher bitte mit Ihrem VPN eine Verbindung zum respektiven Netzwerk herstellen <br>
+     *<code>User</code> Bitte Nutzernamen Ihres Datenbank-Logins angeben <br>
+     * <code>Pass</code> Bitte Passwort zu Ihrem Login angeben <br>
      */
-
     public static void main(String[] args) {
         String url = "jdbc:oracle:thin:@172.22.112.100:1521:fbpool";
         String user = "C##FBPOOL20";
@@ -32,6 +31,7 @@ public class Main {
         menu.mainMenu();
         menu.close();
 
+        // Printed Leerzeile
         System.out.println();
     }
 }

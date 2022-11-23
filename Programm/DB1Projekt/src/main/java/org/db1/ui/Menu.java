@@ -6,60 +6,70 @@ import org.db1.shared.Helpers;
 import java.util.ArrayList;
 
 /**
- * Stellt ein Konsolen Menu bereit um Datenbank mithilfe des DatabaseManager zu verändern
+ * Stellt ein Konsolen Menu bereit um Datenbank mithilfe des DatabaseManager zu verwalten.
  */
 public class Menu {
     private final StatementFactory statementFactory;
-    private final DatabaseManager dbManager;
+    private final DatabaseManager databaseManager;
 
-    public Menu(StatementFactory statementFactory, DatabaseManager dbManager) {
-        this.statementFactory = statementFactory;
-        this.dbManager = dbManager;
-    }
     /**
-     * Creates a menu frame with all table names and indecies.
-     * Then checks for an input and navigates through the submenus
+     * Konsumiert eine Instanz der StatementFactory sowie des DatenbankManagers und instanziert unser Menü.
+     * @param statementFactory Instanz der StatementFactory
+     * @param databaseManager Instanz des DatabaseManagers
+     */
+    public Menu(StatementFactory statementFactory, DatabaseManager databaseManager) {
+        this.statementFactory = statementFactory;
+        this.databaseManager = databaseManager;
+    }
+
+    /**
+     * Listet die Tabellen auf und gibt die Möglichkeit eine Auszuwählen.
      */
     public void mainMenu() {
-        ArrayList<String> menuItems = statementFactory.getDbInit().getTableNames();
+        ArrayList<String> menuItems = statementFactory.getMapper().getTableNames();
         menuItems.add("Beenden");
 
         int inputNumber;
         do {
             printMenu("Welche Tabelle wollen Sie bearbeiten?", menuItems.toArray(new String[0]));
-            inputNumber = statementFactory.getUserInput().readInt();
+            inputNumber = statementFactory.getInputReader().readInt();
 
             if(inputNumber < Helpers.lastIndexOf(menuItems) && inputNumber >= 0) {
                 String tabellenName = menuItems.get(inputNumber);
-                tableMenuDefault(tabellenName);
+                tableMenu(tabellenName);
             } else if(inputNumber != Helpers.lastIndexOf(menuItems)) {
                 System.out.println("Ungültige Eingabe!");
             }
         } while (inputNumber != Helpers.lastIndexOf(menuItems));
         System.out.println("BEENDET");
     }
+
     /**
-     * Printet ein Menu und ruft die Methoden der entsprechnenden tablle an
-     * @param tabellenName Tabelle die bearbeitet werden soll.
-     *
+     * Listet die Verwaltungsoptionen bezüglich einer Tabelle auf und gibt die Möglichkeit diese Auszuwählen.
+     * @param tableName Tabellenname
      */
-    public void tableMenuDefault(String tabellenName) {
+    public void tableMenu(String tableName) {
         String[] menuItems = {"Anzeigen", "Einfügen", "Löschen", "Updaten", "Zurück ins Hauptmenü"};
         int inputNumber;
         do {
-            printMenu("Was wollen Sie mit der Tabelle " + tabellenName + " machen?",  menuItems);
-            inputNumber = statementFactory.getUserInput().readInt();
+            printMenu("Was wollen Sie mit der Tabelle " + tableName + " machen?",  menuItems);
+            inputNumber = statementFactory.getInputReader().readInt();
             switch (inputNumber) {
-                case 0 -> dbManager.showTable(tabellenName);
-                case 1 -> dbManager.insertIntoTable(tabellenName);
-                case 2 -> dbManager.deleteFromTable(tabellenName);
-                case 3 -> dbManager.updateTable(tabellenName);
+                case 0 -> databaseManager.showTable(tableName);
+                case 1 -> databaseManager.insertIntoTable(tableName);
+                case 2 -> databaseManager.deleteFromTable(tableName);
+                case 3 -> databaseManager.updateTable(tableName);
                 case 4 -> System.out.println("... Zurück ins Hauptmenü");
                 default -> System.out.println("Ungültige Eingabe!");
             }
         } while (inputNumber != Helpers.lastIndexOf(menuItems));
     }
 
+    /**
+     * Druckt das Menü in die Konsole.
+     * @param title Menütitel
+     * @param items Menüitems
+     */
     private void printMenu(String title, String[] items) {
         System.out.println(title);
         for (int i = 0; i < items.length; i++) {
@@ -68,6 +78,10 @@ public class Menu {
         System.out.print("Auswahl:  \n");
     }
 
+    /**
+     * Schließt die StatementFactory (bzw. Ruft dessen close Methode auf die wiederum die des Mappers aufruft sowie die des InputReaders wobei erstere wiederum die der Connection aufruft und diese Datenbankverbindung schließt und
+     * letztere die des Scanners aufruft und den Scanner schließt.
+     */
     public void close() {
         statementFactory.close();
     }

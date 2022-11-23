@@ -115,6 +115,7 @@ CREATE TABLE bestellung_produkt
     FOREIGN KEY (bestellung_id) REFERENCES bestellung (id) ON DELETE CASCADE,
     FOREIGN KEY (produkt_id) REFERENCES produkt (id) ON DELETE CASCADE
 );
+
 INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban)
 values (1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE5044050199350280');
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
