@@ -18,20 +18,18 @@ public class DatabaseManager {
     private final StatementFactory statementFactory;
 
     /**
-     * @param url der Connection
-     * @param user der Conected
-     * @param pass um zu Conection
+     * @param url Verbindungs-Url
+     * @param user Nutzername
+     * @param pass Passwort
      * Es wird eine UserInput Instanz angelegt um den UserInput zu verarbeiten in Kombination mit den Hashmaps bei denen die Methoden dazu auf bestimmte Datentypen von SQL gemapped wurden.
      * Es wird eine Instanz von unserem Mapper aufgerufen um die korrekte UserInput methode basierend auf dem Datentypen auswählen können.
      * Es wird eine Instanz der StatementFactory angelegt damit wir unsere SQL Queries zusammenbauen lassen können.
      */
-
     public DatabaseManager(String url, String user, String pass) {
         userInput = new InputReader();
         dbMapper = Mapper.getInstance(url, user, pass);
         statementFactory = new StatementFactory(url, user, pass);
     }
-
 
     /**
      *
@@ -39,7 +37,7 @@ public class DatabaseManager {
      * @param tableName Tabellenname
      */
 
-    public void showTable(String tableName) {
+    public void show(String tableName) {
         try {
             PreparedStatement statement = statementFactory.buildShowAllStatement(tableName);
             ResultSet resultSet = statement.executeQuery();
@@ -75,7 +73,7 @@ public class DatabaseManager {
      * Mittels der Nutzereingabe werden dann dynamisch die Methoden ausgeführt die wir über den Datenttyp der jeweiligen Spalte durch die Vorbereitung im Mapper bekommen haben.
      * @param tableName Tabellenname
      */
-    public void insertIntoTable(String tableName) {
+    public void insert(String tableName) {
         try {
 
             HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
@@ -117,7 +115,7 @@ public class DatabaseManager {
      * Iteriert über alle Spalten und fragt für diese die Nutzereingabe an.
      * @param tableName Tabellenname
      */
-    public void updateTable(String tableName){
+    public void update(String tableName){
         try{
 
             HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
@@ -177,7 +175,7 @@ public class DatabaseManager {
      * Dazu wird einmal über die Spalten und Datentypen iteriert und für Primary-Keys eine Nutzereingabe gefordert.
      * @param tableName Tabellenname
      */
-    public void deleteFromTable(String tableName) {
+    public void delete(String tableName) {
         try {
             HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
             PreparedStatement statement = statementFactory.buildDeleteStatement(tableName);

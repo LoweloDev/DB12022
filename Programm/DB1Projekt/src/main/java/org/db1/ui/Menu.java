@@ -55,10 +55,10 @@ public class Menu {
             printMenu("Was wollen Sie mit der Tabelle " + tableName + " machen?",  menuItems);
             inputNumber = statementFactory.getInputReader().readInt();
             switch (inputNumber) {
-                case 0 -> databaseManager.showTable(tableName);
-                case 1 -> databaseManager.insertIntoTable(tableName);
-                case 2 -> databaseManager.deleteFromTable(tableName);
-                case 3 -> databaseManager.updateTable(tableName);
+                case 0 -> databaseManager.show(tableName);
+                case 1 -> databaseManager.insert(tableName);
+                case 2 -> databaseManager.delete(tableName);
+                case 3 -> databaseManager.update(tableName);
                 case 4 -> System.out.println("... Zurück ins Hauptmenü");
                 default -> System.out.println("Ungültige Eingabe!");
             }

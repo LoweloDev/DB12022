@@ -40,7 +40,7 @@ public class Mapper {
      * @param url Verbindungs-Url
      * @param user Nutzername
      * @param pass Passwort
-     * @return instance of <Code>Mapper</Code>
+     * @return <Code>Mapper</Code>
      */
     public static Mapper getInstance(String url, String user, String pass) {
         if (instance == null) instance = new Mapper(url, user, pass);
@@ -181,7 +181,7 @@ public class Mapper {
     /**
      * Getter für die korrekte READ Methode für Nutzereingaben basierend auf dem SQL Datentypen.
      * Holt aus der HashMap die korrekte READ Methode für den jeweiligen Datentypen.
-     * @param dataType
+     * @param dataType SQL-Datentyp bswp. CHAR
      * @return <code>Method</code>
      */
     public Method getInputReadMethod(String dataType) {

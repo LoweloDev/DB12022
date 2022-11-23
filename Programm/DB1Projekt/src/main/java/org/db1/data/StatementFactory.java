@@ -14,7 +14,7 @@ public class StatementFactory {
     private final Mapper mapper;
 
     /**
-     * Konsumiert im Folgenden erklärte Parameter um einmal die Datenbankverbindung zu holen und erstellt eine Instanz unserem InputReader um Nutzereingaben zu lesen.
+     * Konsumiert im Folgenden erklärte Parameter um einmal die Datenbankverbindung zu holen und erstellt eine Instanz von unserem InputReader um Nutzereingaben zu lesen.
      * @param url Verbindungs-Url
      * @param user Nutzername
      * @param pass Passwort
@@ -141,12 +141,13 @@ public class StatementFactory {
 
     /**
      * Verarbeitet SQL Fehler damit das Programm lauffähig bleibt und ggf. der Nutzer weiß woran es hapert bzw. was zu tun ist.
-     * 1 = ORA-00001 - Unique constraint violated
+     *
      * @see <a href="https://www.techonthenet.com/oracle/errors/ora00001.php">ORA-00001</a>
-     * 1 = ORA-02290 - Check constraint violated
+     * 1 = ORA-00001 - Unique constraint violated
      * @see <a href="https://www.techonthenet.com/oracle/errors/ora02290.php">ORA-02290</a>
-     * 1 = ORA-1400 - Cannot insert NULL
+     * 1 = ORA-02290 - Check constraint violated
      * @see <a href="https://www.techonthenet.com/oracle/errors/ora01400.php">ORA-01400</a>
+     * 1 = ORA-1400 - Cannot insert NULL
      * @param e <code>SQLException</code>
      */
     public void handleSqlException(SQLException e) {

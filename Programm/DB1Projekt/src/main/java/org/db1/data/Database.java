@@ -10,7 +10,8 @@ import java.sql.Statement;
 
 
 /**
- * Stellt Datenbankverbindung her und bietet Startoptionen an bspw. Drop and Create.
+ * Stellt Datenbankverbindung her und bietet Startoptionen an bspw Drop and Create.
+ * 
  */
 public class Database {
     private static Connection instance;
