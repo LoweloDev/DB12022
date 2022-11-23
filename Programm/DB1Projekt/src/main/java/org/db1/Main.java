@@ -11,7 +11,7 @@ import org.db1.ui.Menu;
  * WICHTIG: Bitte beachten Sie, dass wir Gradle als BuildTool verwendet haben und eine kleine Library verwendet haben die für die Aufgabe NICHT relevant war, um bei jedem Start unseres Programms unser Installationsskript neu auszuführen!
  * Sie können diese in der build.gradle finden. Wenn Sie Gradle verwenden sollte es ohne Änderungen abgesehen von der Datenbankverbindung selber keine Probleme bei der Ausführung geben.
  *
- *  @see <a href="https://github.com/LoweloDev/Java-Persistence---but-for-poor-people/tree/main/src/TKKG/DATA">Mein altes DB1 Projekt</a>
+ *  @see <a href="https://github.com/LoweloDev/Java-Persistence---but-for-poor-people/tree/main/src/TKKG/DATA">Ebenfalls WICHTIG: Mein altes DB1 Projekt</a>
  *  Nach Mail-Absprache mit Frau Inga Saatz durften wir den Teil bezüglich der Datenbankkommunikation aus meinem Alten Projekt, den ich im Grunde Solo gebaut habe und somit mein Intellectual-Property ist wiederverwenden. Dazu sollte ich mein altes Projekt hier auf meinem Github Account
  *  verlinken. Grund ist der, dass diese Lösung dynamisch genug ist um mit minimaler Anpassung mit jeder beliebigen Datenbank von Oracle zu funktionieren. Ich habe durchaus weitere Ideen das ganze noch besser umzusetzen und mich dabei zwangsläufig an Dinge wie Repository Design Pattern
  *  und Spring Boot anzunähern, jedoch würde dies den Rahmen dieses Projekts meiner Meinung nach sprengen.
