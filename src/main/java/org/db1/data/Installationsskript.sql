@@ -18,7 +18,7 @@ CREATE TABLE unternehmen
 (
     id            INTEGER     NOT NULL PRIMARY KEY,
     name          varchar(24) NOT NULL,
-    addresse      varchar(24) NOT NULL,
+    adresse      varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
     ceo           varchar(24) NOT NULL,
     iban          varchar(22) NOT NULL UNIQUE
@@ -123,7 +123,7 @@ values (1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
 values (1, 'Mathias Stark', 'C:\Bilder\', NULL);
 INSERT INTO einkaufswagen(id)
-values (1, 0);
+values (1);
 INSERT INTO nutzer(id, vorname, nachname, anrede, mail, iban)
 values (1, 'Lukas', 'Hermann', 'Herr', 'lukashermann@hotmail.com', 'DE5044050199350280');
 INSERT INTO produkt(id, name, preis, skin, geschlecht, age, kategorie_id, unternehmen_id)
