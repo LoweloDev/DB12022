@@ -119,15 +119,15 @@ CREATE TABLE bestellung_produkt
 );
 
 INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban)
-values (1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE5044050199350280');
+values (1, 'Max Musterfrau', 'Sesamstraße', '+493029360122', 'Max Musterfrau', 'DE5044050199350280');
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
-values (1, 'Mathias Stark', 'C:\Bilder\', NULL);
+values (1, 'Hunde', 'C:\Bilder\', NULL);
 INSERT INTO einkaufswagen(id)
 values (1);
 INSERT INTO nutzer(id, vorname, nachname, anrede, mail, iban)
-values (1, 'Lukas', 'Hermann', 'Herr', 'lukashermann@hotmail.com', 'DE5044050199350280');
+values (1, 'Chris', 'Aufsmaul', 'Herr', 'chris.aufsmaul@hotmail.com', 'DE5044050199350280');
 INSERT INTO produkt(id, name, preis, skin, geschlecht, age, kategorie_id, unternehmen_id)
-values (1, 'Löwe', 6.50, 'Zebrastreifen', 'Männlich', 6, 1, 1);
+values (1, 'Schäferhund', 650, 'Braun', 'Männlich', 6, 1, 1);
 INSERT INTO einkaufswagen_produkt(einkaufswagen_id, produkt_id)
 values (1, 1);
 INSERT INTO nutzer_einkaufswagen(nutzer_id, einkaufswagen_id)
