@@ -18,7 +18,7 @@ CREATE TABLE unternehmen
 (
     id            INTEGER     NOT NULL PRIMARY KEY,
     name          varchar(24) NOT NULL,
-    addresse      varchar(24) NOT NULL,
+    adresse      varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
     ceo           varchar(24) NOT NULL,
     iban          varchar(22) NOT NULL UNIQUE
@@ -118,7 +118,7 @@ CREATE TABLE bestellung_produkt
     FOREIGN KEY (produkt_id) REFERENCES produkt (id) ON DELETE CASCADE
 );
 
-INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban)
+INSERT INTO unternehmen(id, name, adresse, telefonnummer, ceo, iban)
 values (1, 'Max Musterfrau', 'Sesamstraße', '+493029360122', 'Max Musterfrau', 'DE5044050199350280');
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
 values (1, 'Hunde', 'C:\Bilder\', NULL);
