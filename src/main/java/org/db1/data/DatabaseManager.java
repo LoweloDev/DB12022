@@ -21,8 +21,8 @@ public class DatabaseManager {
      * @param url Verbindungs-Url
      * @param user Nutzername
      * @param pass Passwort
-     * Es wird eine UserInput Instanz angelegt, um die Nutzereingaben zu verarbeiten, in Kombination mit den Hashmaps bei denen die Methoden dazu auf bestimmte Datentypen von SQL gemapped wurden.
-     * Es wird eine Instanz von unserem Mapper aufgerufen um die korrekte UserInput methode basierend auf dem Datentypen auswählen können.
+     * Es wird eine InputReader Instanz angelegt, um die Nutzereingaben zu verarbeiten, in Kombination mit den Hashmaps bei denen die Methoden dazu auf bestimmte Datentypen von SQL gemapped wurden.
+     * Es wird eine Instanz von unserem Mapper aufgerufen um die korrekte InputReader methode basierend auf dem Datentypen auswählen können.
      * Es wird eine Instanz der StatementFactory angelegt damit wir unsere SQL Queries zusammenbauen lassen können.
      */
     public DatabaseManager(String url, String user, String pass) {
@@ -76,11 +76,11 @@ public class DatabaseManager {
     public void insert(String tableName) {
         try {
 
-            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
+            HashMap<Integer, MetaData> columnMetaData = dbMapper.getColumnMetaData(tableName);
             PreparedStatement statement = statementFactory.buildInsertStatement(tableName);
 
-            for (int i = 0; i < colNamesNTypes.size(); i++) {
-                MetaData data = colNamesNTypes.get(i);
+            for (int i = 0; i < columnMetaData.size(); i++) {
+                MetaData data = columnMetaData.get(i);
                 String rowName = data.getName();
                 String type = data.getTypeName();
                 char auswahl = 'y';
@@ -103,7 +103,7 @@ public class DatabaseManager {
                     setParameterInStatement.invoke(statement, i + 1, readMethod.invoke(inputReader));
                 }
             }
-            System.out.println(statement.executeUpdate() == 1 ? "Erfolgreich eingefügt" : "Bitte überprüfe deine Eingabe, da kann etwas nicht stimmmen! (Tabelle wurde nicht verändert)");
+            System.out.println(statement.executeUpdate() == 1 ? "Erfolgreich eingefügt" : "Bitte überprüfe deine Eingabe!");
         } catch (SQLException e) {
             statementFactory.handleSqlException(e);
         } catch (InvocationTargetException | IllegalAccessException ignored) {}
@@ -118,14 +118,14 @@ public class DatabaseManager {
     public void update(String tableName){
         try{
 
-            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
+            HashMap<Integer, MetaData> columnMetaData = dbMapper.getColumnMetaData(tableName);
             PreparedStatement statement = statementFactory.buildUpdateStatement(tableName);
 
             ArrayList<MetaData> primaryKeys = new ArrayList<>();
             int statementCount = 1;
 
-            for (int i = 0; i < colNamesNTypes.size(); i++) {
-                MetaData data = colNamesNTypes.get(i);
+            for (int i = 0; i < columnMetaData.size(); i++) {
+                MetaData data = columnMetaData.get(i);
                 String rowName = data.getName();
                 String type = data.getTypeName();
 
@@ -177,15 +177,15 @@ public class DatabaseManager {
      */
     public void delete(String tableName) {
         try {
-            HashMap<Integer, MetaData> colNamesNTypes = dbMapper.getColumnMetaData(tableName);
+            HashMap<Integer, MetaData> columnMetaData = dbMapper.getColumnMetaData(tableName);
             PreparedStatement statement = statementFactory.buildDeleteStatement(tableName);
             System.out.println("---LÖSCHE AUS " + tableName + "---");
             int statementCount = 1;
 
-            for (int i = 0; i < colNamesNTypes.size(); i++) {
-                if(colNamesNTypes.get(i).isPrimaryKey()) {
-                    String rowName = colNamesNTypes.get(i).getName();
-                    String type = colNamesNTypes.get(i).getTypeName();
+            for (int i = 0; i < columnMetaData.size(); i++) {
+                if(columnMetaData.get(i).isPrimaryKey()) {
+                    String rowName = columnMetaData.get(i).getName();
+                    String type = columnMetaData.get(i).getTypeName();
 
                     System.out.println("Bitte geben Sie " + rowName + " ein vom zu löschendem " + tableName);
                     Method sql = dbMapper.getStatementSetMethod(type);
