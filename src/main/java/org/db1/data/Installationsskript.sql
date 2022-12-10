@@ -18,7 +18,7 @@ CREATE TABLE unternehmen
 (
     id            INTEGER     NOT NULL PRIMARY KEY,
     name          varchar(24) NOT NULL,
-    addresse      varchar(24) NOT NULL,
+    adresse      varchar(24) NOT NULL,
     telefonnummer varchar(24) NOT NULL UNIQUE,
     ceo           varchar(24) NOT NULL,
     iban          varchar(22) NOT NULL UNIQUE
@@ -36,8 +36,10 @@ CREATE TABLE kategorie
 
 CREATE TABLE einkaufswagen
 (
-    id     INTEGER NOT NULL PRIMARY KEY,
-    anzahl INTEGER
+    id     INTEGER NOT NULL PRIMARY KEY
+--     Anzahl Deprecated weil belangloses Attribut, da man in hypothetischem Frontend sowieso ein Array von Objekten haben würde um die Liste von Produkten im Warenkorb anzuzeigen.
+--     Somit könnte man für die Anzahl einfach Array.length oder ArrayList.size() oder Javascript Equivalent verwenden
+--     anzahl INTEGER
 );
 
 CREATE TABLE nutzer
@@ -116,16 +118,16 @@ CREATE TABLE bestellung_produkt
     FOREIGN KEY (produkt_id) REFERENCES produkt (id) ON DELETE CASCADE
 );
 
-INSERT INTO unternehmen(id, name, addresse, telefonnummer, ceo, iban)
-values (1, 'Mathias Stark', 'Straßestraße', '0163151515', 'Mathias_Stark', 'DE5044050199350280');
+INSERT INTO unternehmen(id, name, adresse, telefonnummer, ceo, iban)
+values (1, 'Max Musterfrau', 'Sesamstraße', '+493029360122', 'Max Musterfrau', 'DE5044050199350280');
 INSERT INTO kategorie(id, name, bild, subkategorie_id)
-values (1, 'Mathias Stark', 'C:\Bilder\', NULL);
-INSERT INTO einkaufswagen(id, anzahl)
-values (1, 0);
+values (1, 'Hunde', 'C:\Bilder\', NULL);
+INSERT INTO einkaufswagen(id)
+values (1);
 INSERT INTO nutzer(id, vorname, nachname, anrede, mail, iban)
-values (1, 'Lukas', 'Hermann', 'Herr', 'lukashermann@hotmail.com', 'DE5044050199350280');
+values (1, 'Chris', 'Aufsmaul', 'Herr', 'chris.aufsmaul@hotmail.com', 'DE5044050199350280');
 INSERT INTO produkt(id, name, preis, skin, geschlecht, age, kategorie_id, unternehmen_id)
-values (1, 'Löwe', 6.50, 'Zebrastreifen', 'Männlich', 6, 1, 1);
+values (1, 'Schäferhund', 650, 'Braun', 'Männlich', 6, 1, 1);
 INSERT INTO einkaufswagen_produkt(einkaufswagen_id, produkt_id)
 values (1, 1);
 INSERT INTO nutzer_einkaufswagen(nutzer_id, einkaufswagen_id)

@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 
 /**
- * Stellt Datenbankverbindung her und bietet Startoptionen an bspw Drop and Create.
+ * Stellt Datenbankverbindung her und bietet Startoptionen an bspw. Drop and Create.
  * 
  */
 public class Database {
@@ -38,10 +38,6 @@ public class Database {
 
         try {
             connection = DriverManager.getConnection(url, user, pass);
-
-//            preventDropException(connection);
-//            Database.dropAndCreate(connection);
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -49,6 +45,7 @@ public class Database {
         return connection;
     }
 
+    // DEPRECATED Grund: Siehe unten
 //    /**
 //     *
 //     * @param connection
@@ -68,28 +65,29 @@ public class Database {
 //            }
 //        } catch (Exception ignored) {}
 //    }
-//
+
+    // DEPRECATED Weil Pfad windows spezifisch und kein bock für andere Operating Systeme zu bauen. Installationsskript manuell ausführen
 //    /**
 //     *
 //     * @param connection
 //     *
 //     * Löscht und erstellt die Tabellen neu und befüllt sie mit Dummy-Daten
 //     */
-//    private static void dropAndCreate(Connection connection) {
-//        try {
-//            ScriptRunner scriptRunner = new ScriptRunner(connection, false, true);
-//            String filePath = new File("").getAbsolutePath();
-//            filePath = filePath.concat("\\src\\main\\java\\org\\db1\\data\\db_init.sql");
-//
-//            Reader reader = new BufferedReader(new FileReader(filePath));
-//            scriptRunner.runScript(reader);
-//
-//            System.out.println();
-//            System.out.println("DROPPPED AND RECREATED DATABASE SUCCESSFULLY");
-//            System.out.println();
-//        } catch (Exception e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
+////    private static void dropAndCreate(Connection connection) {
+////        try {
+////            ScriptRunner scriptRunner = new ScriptRunner(connection, false, true);
+////            String filePath = new File("").getAbsolutePath();
+////            filePath = filePath.concat("\\src\\main\\java\\org\\db1\\data\\Installationsskript.sql");
+////
+////            Reader reader = new BufferedReader(new FileReader(filePath));
+////            scriptRunner.runScript(reader);
+////
+////            System.out.println();
+////            System.out.println("DROPPPED AND RECREATED DATABASE SUCCESSFULLY");
+////            System.out.println();
+////        } catch (Exception e) {
+////            e.printStackTrace();
+////        }
+////
+////    }
 }
